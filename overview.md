@@ -2,7 +2,7 @@
 
 > 原文请查阅[这里](https://blog.sessionstack.com/how-does-javascript-actually-work-part-1-b0bacc073cf)
 
-**这是  JavaScript 工作原理 的第一章。本章会对语言引擎，运行时，调用栈做一个概述。**
+**这是  JavaScript 工作原理的第一章。本章会对语言引擎，运行时，调用栈做一个概述。**
 
 随着 JavaScript 越来越流行，团队也利用其在他们诸如前端，后端，混合 apps，嵌入设备以及更多设备等开发栈中的不同层面的支持。
 

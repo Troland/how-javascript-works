@@ -2,7 +2,7 @@
 
 > Author: @Troland  @moyuling
 
-本文是介绍 JavaScript 的工作原理。
+本文是介绍 JavaScript 的工作原理，一共 11 章。
 
 ## 目录结构
 
