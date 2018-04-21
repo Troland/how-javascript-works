@@ -32,7 +32,7 @@
 
 谷歌 V8 引擎是流行的 JavaScript 引擎之一。V8 引擎在诸如 Chrome 和 Node.js 内部使用。这里有一个简单的视图来描绘其大概。
 
-![](/Users/Troland/repos/iwork/how-javascript-works/assets/1_OnH_DlbNAPvB9KLxUCyMsA.png)
+![](./assets/1_OnH_DlbNAPvB9KLxUCyMsA.png)
 
 引擎包括两个主要组件：
 
@@ -47,7 +47,7 @@
 
 事实上这个情况有点复杂呃。。
 
-![](/Users/Troland/repos/iwork/how-javascript-works/assets/1_4lHHyfEhVB0LnQ3HlhSs8g.png)
+![](./assets/1_4lHHyfEhVB0LnQ3HlhSs8g.png)
 
 所以，我们除了引擎但是实际上还有更多其它方面的东西。我们拥有被称为 Web API 的东西，这些 Web API 是由浏览器提供的，比如 DOM,AJAX,setTimeout 以及其它。
 
@@ -76,7 +76,7 @@ printSquare(5);
 
 当引擎开始执行这段代码的时候，调用栈会被清空。之后，产生如下步骤：
 
-![](/Users/Troland/repos/iwork/how-javascript-works/assets/1_Yp1KOt_UJ47HChmS9y7KXw.png)
+![](./assets/1_Yp1KOt_UJ47HChmS9y7KXw.png)
 
 调用栈中的每个入口被称为堆栈结构。
 
@@ -100,7 +100,7 @@ start();
 
 如果在 Chrome 中执行（假设代码在 foo.js 的文件中），将会产生如下的堆栈追踪：
 
-![](/Users/Troland/repos/iwork/how-javascript-works/assets/1_T-W_ihvl-9rG4dn18kP3Qw.png)
+![](./assets/1_T-W_ihvl-9rG4dn18kP3Qw.png)
 
 "堆栈溢出"－当你达到最大调用栈大小的时候发生。这种情况相当容易发生，特别是当你使用递归而没有仔细地检查你的代码的时候。查看下如下代码：
 
@@ -114,11 +114,11 @@ foo();
 
 当引擎开始执行这段代码的时候，它开始调用 foo 函数。这个函数，然而，会递归并开始调用其自身而没有任何结束条件。所以在每步执行过程中，调用堆栈会反复地添加同样的函数。执行过程如下所示：
 
-![](/Users/Troland/repos/iwork/how-javascript-works/assets/1_AycFMDy9tlDmNoc5LXd9-g.png)
+![](./assets/1_AycFMDy9tlDmNoc5LXd9-g.png)
 
 在某一时刻，然而，调用堆栈中的函数调用次数超过了调用堆栈的实际大小，这样浏览器决定抛出错误的动作，如下所示：
 
-![](/Users/Troland/repos/iwork/how-javascript-works/assets/1_e0nEd59RPKz9coyY8FX-uw.png)
+![](./assets/1_e0nEd59RPKz9coyY8FX-uw.png)
 
 在单线程中运行代码会相当轻松因为你不用处理多线程环境中产生的一些复杂情况，比如死锁。
 
@@ -132,7 +132,7 @@ foo();
 
 这不会是仅有的问题。一旦你的浏览器开始在调用栈中执行如此多的任务，浏览器将会在相当一段时间内停止交互。大多数浏览器会抛出一个错误，询问你是否关闭网页。
 
-![](/Users/Troland/repos/iwork/how-javascript-works/assets/1_WlMXK3rs_scqKTRV41au7g.jpeg)
+![](./assets/1_WlMXK3rs_scqKTRV41au7g.jpeg)
 
 现在，这并不是最好的用户体验，难道不是吗？
 
