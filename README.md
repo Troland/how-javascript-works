@@ -2,7 +2,7 @@
 
 > Author: @Troland  @moyuling
 
-本文是介绍 JavaScript 的工作原理，一共 11 章。
+本文是翻译介绍 JavaScript 的工作原理的，一共 11 章，原文见[这里](https://blog.sessionstack.com/tagged/tutorial)。
 
 ## 目录结构
 
