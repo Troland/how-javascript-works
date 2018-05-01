@@ -18,7 +18,7 @@
 
 不管你使用哪种编程语言，内存生命周期几乎是一样的：
 
-![](/Users/Troland/repos/iwork/how-javascript-works/assets/1_slxXgq_TO38TgtoKpWa_jQ.png)
+![](./assets/1_slxXgq_TO38TgtoKpWa_jQ.png)
 
 以下是每一步生命周期所发生事情的一个概述：
 
@@ -61,7 +61,7 @@ double m; // 8 字节
 
 注意到这里当我们试图访问 `x[4]` 时候，将会访问到 m 相关的数据。这是因为我们访问了数组中不存在的数组元素－它超过了最后一个实际分配到内存的数组元素 `x[3]` 4 字节，并且有可能会读取(或者覆写) `m` 的位。这几乎可以确定会产生其它程序所预料不到的后果。
 
-![](/Users/Troland/repos/iwork/how-javascript-works/assets/1_5aBou4onl1B8xlgwoGTDOg.png)
+![](./assets/1_5aBou4onl1B8xlgwoGTDOg.png)
 
 当函数调用其它函数的时候，各个函数都会在被调用的时候取得其在堆栈中的各自分片内存地址。函数会把保存它所有的本地变量，但也会有一个程序计数器用来记住函数在其执行环境中的地址。当函数运行结束时，其内存块可以再次被用作其它用途。
 
@@ -79,7 +79,7 @@ int n = readInput(); // 从用户读取信息
 
 因此，就不能够在堆栈中为变量分配内存空间。相反，程序需要在运行时显式地从操作系统分配到正确的内存空间。这里的内存是由动态内存空间所分配的。静态和动态内存分配的差异总结如下图表：
 
-![](/Users/Troland/repos/iwork/how-javascript-works/assets/1_qY-yRQWGI-DLS3zRHYHm9A.png)
+![](./assets/1_qY-yRQWGI-DLS3zRHYHm9A.png)
 
 *静态和动态分配内存的区别*
 
@@ -212,7 +212,7 @@ function f() {
 f();
 ```
 
-![](/Users/Troland/repos/iwork/how-javascript-works/assets/1_GF3p99CQPZkX3UkgyVKSHw.png)
+![](./assets/1_GF3p99CQPZkX3UkgyVKSHw.png)
 
 ## 标记-清除算法
 
@@ -224,7 +224,7 @@ f();
 * 随后，算法会检测所有的根变量及他们的后代变量并标记它们为激活状态(表示它们不可回收)。任何根变量所到达不了的变量(或者对象等等)都会被标记为内存垃圾。
 * 最后，垃圾回收器会释放所有非激活状态的内存片段然后返还给操作系统。
 
-![](/Users/Troland/repos/iwork/how-javascript-works/assets/1_WVtok3BV0NgU95mpxk9CNg.gif)
+![](./assets/1_WVtok3BV0NgU95mpxk9CNg.gif)
 
 *标记-清除算法的动态图示*
 
@@ -238,7 +238,7 @@ f();
 
 在之前的第一个示例中，当函数返回，全局对象不再引用这两个对象。结果，内存垃圾回收器发现它们是不可获得的。
 
-![](/Users/Troland/repos/iwork/how-javascript-works/assets/1_FbbOG9mcqWZtNajjDO6SaA.png)
+![](./assets/1_FbbOG9mcqWZtNajjDO6SaA.png)
 
 即使两个对象互相引用，也不能够从根变量获得他们。
 
@@ -256,7 +256,7 @@ f();
 
 正如内存管理所说的那样，内存泄漏即一些程序在过去时使用但处于闲置状态，却没有返回给操作系统或者可用的内存池。
 
-![](/Users/Troland/repos/iwork/how-javascript-works/assets/1_0B-dAUOH7NrcCDP6GhKHQw.jpeg)
+![](./assets/1_0B-dAUOH7NrcCDP6GhKHQw.jpeg)
 
 编程语言喜欢多种内存管理方法。然而，某个内存片段是否被使用是一个不确定的问题。换句话说，只有开发人员清楚某个内存片段是否可以返回给操作系统。
 
