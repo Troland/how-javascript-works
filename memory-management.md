@@ -1,4 +1,4 @@
-# 内存管理及如何处理 4 类常见的内存泄漏
+# 内存管理及如何处理 4 类常见的内存泄漏问题
 
 > 原文请查阅[这里](https://blog.sessionstack.com/how-javascript-works-memory-management-how-to-handle-4-common-memory-leaks-3f28b94cfbec)
 
