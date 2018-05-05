@@ -22,7 +22,7 @@
 
 ![](./assets/1_WlMXK3rs_scqKTRV41au7g.jpeg)
 
-## JavaScript 程序的组件
+## JavaScript 程序组件
 
 你可能会在单一的 .js 文件中书写你的 JavaScript 程序，但是你的程序是由多个代码块组成的，当前只有一个代码块在运行，其它代码块将在随后运行。最常见的块状单元是函数。
 
