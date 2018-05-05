@@ -94,7 +94,7 @@ second
 
 我们将会以一个有些让人费解的问题开始－尽管允许异步执行 JavaScript 代码(比如之前讨论的 `setTimetout`)，但是直到 ES6，实际上 JavaScript 本身并没有集成任何直接的异步编程概念。JavaScript 引擎只允许在任意时刻执行单个的程序片段。
 
-可以查看之前的[文章](./overview.md)来了解 JavaScript 引擎的工作原理。
+可以查看之前的[文章](https://github.com/Troland/how-javascript-works/blob/master/overview.md)来了解 JavaScript 引擎的工作原理。
 
 那么， JS 引擎是如何执行程序片段的呢？实际上，JS 引擎并不是隔离运行的－它运行在一个宿主环境中，对大多数开发者来说是典型的 web 浏览器或者 Node.js。实际上，现在 JavaScript 广泛应用于从机器到电灯泡的各种设备之中。每个设备代表了 JS 引擎的不同类型的宿主环境。
 
@@ -198,7 +198,7 @@ console.log('Bye');
 
 ![](./assets/1_t2Btfb_tBbBxTvyVgKX0Qg.png)
 
-快速录像回放：
+录像快速回放：
 
 ![](./assets/1_TozSrkk92l8ho6d8JxqF_w.gif)
 
@@ -248,7 +248,7 @@ ES6 介绍了一个被称为『作业队列』的概念。它位于事件循环�
 
 为了无限循环，就会饥饿程序所需要的资源直到下一个事件循环 tick。从概念上讲，这类似于在代码里面书写耗时或者死循环(类似 `while(true)`)。
 
-作业是有些类似于 `setTimeout(callback, 0)` "hack"，但是是以这样的方式实现的，它们拥有明确定义和有保证的执行顺序：之后而尽快地执行。
+作业是有些类似于 `setTimeout(callback, 0)` 小技巧，但是是以这样的方式实现的，它们拥有明确定义和有保证的执行顺序：之后且尽快地执行。
 
 ## 回调
 
