@@ -1,6 +1,6 @@
 # 事件循环及异步编程的出现和 5 种更好的 async/await 编程方式
 
-> 原文请查阅[这里](https://blog.sessionstack.com/how-javascript-works-event-loop-and-the-rise-of-async-programming-5-ways-to-better-coding-with-2f077c4438b5)，略有删减。
+> 原文请查阅[这里](https://blog.sessionstack.com/how-javascript-works-event-loop-and-the-rise-of-async-programming-5-ways-to-better-coding-with-2f077c4438b5)，本文采用[知识共享署名 3.0 中国大陆许可协议](http://creativecommons.org/licenses/by/3.0/cn/)共享，BY [Troland](https://github.com/Troland)。
 
 **这是  JavaScript 工作原理的第四章。**
 

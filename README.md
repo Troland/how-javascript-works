@@ -11,6 +11,14 @@
 - 第三章：[内存管理及如何处理 4 类常见的内存泄漏](memory-management.md)
 - 第四章：[事件循环及异步编程的出现和 5 种更好的 async/await 编程方式](event-loop.md) 
 
+## 版权说明
+
+未经允许禁止任何形式的转载。
+
+除非另行注明，这个项目中的所有内容采用[知识共享署名 3.0 中国大陆许可协议](http://creativecommons.org/licenses/by/3.0/cn/)共享，BY [Troland](https://github.com/Troland)。
+
+欢迎通过 Issue 或者 Pull Request 提建议。
+
 ## 来杯咖啡
 
 <img src="https://user-images.githubusercontent.com/1475173/39091700-c211409e-462c-11e8-8531-90261c9a7b73.png" width="300"/>
