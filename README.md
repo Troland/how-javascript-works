@@ -10,6 +10,7 @@
 - 第二章：[如何在 V8 引擎中书写最优代码的 5 条小技巧](v8.md)
 - 第三章：[内存管理及如何处理 4 类常见的内存泄漏](memory-management.md)
 - 第四章：[事件循环及异步编程的出现和 5 种更好的 async/await 编程方式](event-loop.md) 
+- 第五章：[深入理解 WebSockets 和带有 SSE 机制的HTTP/2 以及正确的使用姿势](http.md) 
 
 ## 版权说明
 
