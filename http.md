@@ -1,6 +1,6 @@
 # 深入理解 WebSockets 和带有 SSE 机制的HTTP/2 以及正确的使用姿势
 
-> 原文请查阅[这里](https://blog.sessionstack.com/how-javascript-works-deep-dive-into-websockets-and-http-2-with-sse-how-to-pick-the-right-path-584e6b8e3bf7)，略有改动，本文采用[知识共享署名 3.0 中国大陆许可协议](http://creativecommons.org/licenses/by/3.0/cn/)共享，BY [Troland](https://github.com/Troland)。
+> 原文请查阅[这里](https://blog.sessionstack.com/how-javascript-works-deep-dive-into-websockets-and-http-2-with-sse-how-to-pick-the-right-path-584e6b8e3bf7)，略有改动，本文采用[知识共享署名 4.0 国际许可协议](http://creativecommons.org/licenses/by/4.0/)共享，BY [Troland](https://github.com/Troland)。
 
 **这是  JavaScript 工作原理的第五章。**
 
