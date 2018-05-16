@@ -1,5 +1,7 @@
 # 内存管理及如何处理 4 类常见的内存泄漏问题
 
+> Contributors：[@Troland](https://github.com/Troland/) [@三月](https://github.com/heaven2049)
+>
 > 原文请查阅[这里](https://blog.sessionstack.com/how-javascript-works-memory-management-how-to-handle-4-common-memory-leaks-3f28b94cfbec)，本文采用[知识共享署名 4.0 国际许可协议](http://creativecommons.org/licenses/by/4.0/)共享，BY [Troland](https://github.com/Troland)。
 
 **这是  JavaScript 工作原理的第三章。**
@@ -407,25 +409,25 @@ function removeImage() {
 
 # 内存管理心得
 
-以下内容为个人原创分享。By 三月。
+以下内容为个人原创分享。By [三月](https://github.com/heaven2049)。
 
 ### 指导思想
 
-尽可能减少内存占用，尽可能减少GC。
+尽可能减少内存占用，尽可能减少 GC。
 
-- 减少GC次数
+- 减少 GC 次数
 
-  浏览器会不定时回收垃圾内存，称为GC，不定时触发，一般在向浏览器申请新内存时触发。一般来说，GC会较为耗时，GC触发时可能会导致页面卡顿及丢帧。故我们要尽可能避免GC的触发。GC无法通过代码触发，但部分浏览器如Chrome，可在DevTools -> TimeLine页面手动点击CollectGarbage按钮触发GC。
+  浏览器会不定时回收垃圾内存，称为 GC，不定时触发，一般在向浏览器申请新内存时，浏览器会检测是否到达一个临界值再进行触发。一般来说，GC 会较为耗时，GC 触发时可能会导致页面卡顿及丢帧。故我们要尽可能避免GC的触发。GC 无法通过代码触发，但部分浏览器如 Chrome，可在 DevTools -> TimeLine 页面手动点击 CollectGarbage 按钮触发 GC。
 
 - 减少内存占用
 
-  降低内存占用，可避免内存占用过多导致的应用/系统卡顿，App闪退等，在移动端尤为明显。当内存消耗较多时，浏览器可能会频繁触发GC。而如前所述，GC发生在申请新内存时，若能避免申请新内存，则可避免GC触发。
+  降低内存占用，可避免内存占用过多导致的应用/系统卡顿，App 闪退等，在移动端尤为明显。当内存消耗较多时，浏览器可能会频繁触发 GC。而如前所述，GC 发生在申请新内存时，若能避免申请新内存，则可避免GC 触发。
 
 ### 优化方案
 
 #### 使用对象池
 
-> 对象池**（英语：object pool pattern）是一种[设计模式](https://zh.wikipedia.org/wiki/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F_(%E8%AE%A1%E7%AE%97%E6%9C%BA))。一个**对象池**包含一组已经初始化过且可以使用的对象，而可以在有需求时创建和销毁对象。池的用户可以从池子中取得对象，对其进行操作处理，并在不需要时归还给池子而非直接销毁它。这是一种特殊的工厂对象。
+> 对象池**（英语：object pool pattern）是一种[设计模式](https://zh.wikipedia.org/wiki/%E5%AF%B9%E8%B1%A1%E6%B1%A0%E6%A8%A1%E5%BC%8F)。**一个对象池包含一组已经初始化过且可以使用的对象，而可以在有需求时创建和销毁对象。池的用户可以从池子中取得对象，对其进行操作处理，并在不需要时归还给池子而非直接销毁它。这是一种特殊的工厂对象。
 
 > 若初始化、实例化的代价高，且有需求需要经常实例化，但每次实例化的数量较少的情况下，使用对象池可以获得显著的效能提升。从池子中取得对象的时间是可预测的，但新建一个实例所需的时间是不确定。
 >
@@ -439,7 +441,7 @@ function removeImage() {
 
 2. 预创建对象
 
-   如在高频操作下，如滚动事件、TouchMove事件、resize事件、for循环内部等频繁创建对象，则可能会触发GC的发生。故在特殊情况下，可优化为提前创建对象放入池子。
+   如在高频操作下，如滚动事件、TouchMove事件、resize事件、for 循环内部等频繁创建对象，则可能会触发GC的发生。故在特殊情况下，可优化为提前创建对象放入池子。
 
    高频情况下，建议使用[截流/防抖](https://rockjins.js.org/2017/02/21/2017-02-21-debounce-function/)及任务队列相关技术。
 
@@ -451,13 +453,13 @@ function removeImage() {
 
 #### 其他优化tips
 
-1. 尽可能避免创建对象，非必要情况下避免调用会创建对象的方法，如Array.slice、Array.map、Array.filter、字符串相加、$('div')、ArrayBuffer.slice等。
+1. 尽可能避免创建对象，非必要情况下避免调用会创建对象的方法，如 `Array.slice`、`Array.map`、`Array.filter`、字符串相加、`$('div')`、`ArrayBuffer.slice` 等。
 
-2. 不再使用的对象，手动赋为null，可避免循环引用等问题。
+2. 不再使用的对象，手动赋为 null，可避免循环引用等问题。
 
-3. 使用[Weakmap](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/WeakMap)
+3. 使用 [Weakmap](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/WeakMap)
 
-4. 生产环境勿 console.log大对象，包括Dom、大数组、ImageData、ArrayBuffer等。因为console.log的对象不会被垃圾回收。详见[Will console.log prevent garbage collection?](https://stackoverflow.com/questions/28839652/will-console-log-prevent-garbage-collection)。
+4. 生产环境勿用 `console.log` 大对象，包括 DOM、大数组、ImageData、ArrayBuffer 等。因为 `console.log` 的对象不会被垃圾回收。详见[Will console.log prevent garbage collection?](https://stackoverflow.com/questions/28839652/will-console-log-prevent-garbage-collection)。
 
 5. 合理设计页面，按需创建对象/渲染页面/加载图片等。
 
@@ -467,31 +469,31 @@ function removeImage() {
      - 为了省事儿，一次性渲染全部数据，再做隐藏。
      - 为了省事儿，一次性加载/渲染全部图片。
 
-   - 使用重复dom等，如重复使用同一个弹窗而非创建多个。
+   - 使用重复 DOM 等，如重复使用同一个弹窗而非创建多个。
 
-     如Vue-Element框架中，PopOver/Tooltip等组件用于表格内时会创建m * n个实例，可优化为只创建一个实例，动态设置位置及数据。
+     如 Vue-Element 框架中，PopOver/Tooltip 等组件用于表格内时会创建 m * n 个实例，可优化为只创建一个实例，动态设置位置及数据。
 
-6. ImageData对象是JS内存杀手，避免重复创建ImageData对象。
+6. ImageData 对象是 JS 内存杀手，避免重复创建 ImageData 对象。
 
-7. 重复使用ArrayBuffer。
+7. 重复使用 ArrayBuffer。
 
-8. 压缩图片、按需加载图片、按需渲染图片，使用恰当的图片尺寸、图片格式，如WebP格式。
+8. 压缩图片、按需加载图片、按需渲染图片，使用恰当的图片尺寸、图片格式，如 WebP 格式。
 
 #### 图片处理优化
 
-假设渲染一张100KB大小，300x500的透明图片，粗略的可分为三个过程：
+假设渲染一张 100KB 大小，300x500 的透明图片，粗略的可分为三个过程：
 
 1. 加载图片
 
-   加载图片二进制格式到内存中并缓存，此时消耗了100KB内存 & 100KB缓存。
+   加载图片二进制格式到内存中并缓存，此时消耗了100KB 内存 & 100KB 缓存。
 
 2. 解码图片
 
-   将二进制格式解码为像素格式，此时占用宽 * 高 * 24（透明为32位）比特大小的内存,即 300 * 500 * 32，约等于585KB，这里约定名为像素格式内存。个人猜测此时浏览器会回收加载图片时创建的100KB内存。
+   将二进制格式解码为像素格式，此时占用宽 * 高 * 24（透明为32位）比特大小的内存,即 300 * 500 * 32，约等于 585 KB，这里约定名为像素格式内存。个人猜测此时浏览器会回收加载图片时创建的 100KB 内存。
 
 3. 渲染图片
 
-   通过CPU或GPU渲染图片，若为GPU渲染，则还需上传到GPU显存，该过程较为耗时，由图片尺寸 / 显存位宽决定，图片尺寸越大，上传时间越慢，占用显存越多。
+   通过 CPU 或 GPU 渲染图片，若为 GPU 渲染，则还需上传到 GPU 显存，该过程较为耗时，由图片尺寸 / 显存位宽决定，图片尺寸越大，上传时间越慢，占用显存越多。
 
 > 其中，较旧的浏览器如Firefox回收像素内存时机较晚，若渲染了大量图片时会内存占用过高。
 
@@ -501,23 +503,23 @@ PS：浏览器会复用同一份图片二进制内存及像素格式内存，浏
 
 总结一下，浏览器渲染图片时所消耗内存由图片文件大小内存、宽高、透明度等所决定，故建议：
 
-1. 使用CSS3、SVG、IconFont、Canvas替代图片。展示大量图片的页面，建议使用Canvas渲染而非直接使用img标签。具体详见[Javascript的Image对象、图像渲染与浏览器内存两三事](http://www.voidcn.com/article/p-rrwveyhj-dc.html)。
+1. 使用 CSS3、SVG、IconFont、Canvas 替代图片。展示大量图片的页面，建议使用 Canvas 渲染而非直接使用img标签。具体详见 [Javascript的Image对象、图像渲染与浏览器内存两三事](http://www.voidcn.com/article/p-rrwveyhj-dc.html)。
 
 2. 适当压缩图片，可减小带宽消耗及图片内存占用。
 
-3. 使用恰当的图片尺寸，即响应式图片，为不同终端输出不同尺寸图片，勿使用原图缩小代替ICON等。
+3. 使用恰当的图片尺寸，即响应式图片，为不同终端输出不同尺寸图片，勿使用原图缩小代替 ICON 等，比如一些图片服务如 OSS。
 
 4. 使用恰当的图片格式，如使用WebP格式等。详细图片格式对比，使用场景等建议查看[web前端图片极限优化策略](http://jixianqianduan.com/frontend-weboptimize/2015/11/17/front-end-image-optmize.html)。
 
 5. 按需加载及按需渲染图片。
 
-6. 预加载图片时，切记要将img对象赋为null，否则会导致图片内存无法释放。
+6. 预加载图片时，切记要将 img 对象赋为 null，否则会导致图片内存无法释放。
 
    当实际渲染图片时，浏览器会从缓存中再次读取。
 
-7. 将离屏img对象赋为null，src赋为null，督促浏览器及时回收内存及像素格式内存。
+7. 将离屏 img 对象赋为 null，src 赋为 null，督促浏览器及时回收内存及像素格式内存。
 
-8. 将非可视区域图片移除，需要时再次渲染。和按需渲染结合时实现很简单，切换src与v-src即可。
+8. 将非可视区域图片移除，需要时再次渲染。和按需渲染结合时实现很简单，切换 src 与 v-src 即可。
 
 ### 参考链接：
 
@@ -534,3 +536,5 @@ PS：浏览器会复用同一份图片二进制内存及像素格式内存，浏
 [MDN Weakmap](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/WeakMap)
 
 [函数节流、函数防抖实现原理分析](https://rockjins.js.org/2017/02/21/2017-02-21-debounce-function/)
+
+[a-tour-of-v8-garbage-collection](http://jayconrod.com/posts/55/a-tour-of-v8-garbage-collection)
