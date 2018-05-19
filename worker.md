@@ -274,7 +274,7 @@ bc.close()
 * 使用 `importScripts` 来引用外部脚本
 * [创建其它 web workers](https://www.html5rocks.com/en/tutorials/workers/basics/#toc-enviornment-subworkers)
 
-## Web Worker 局限性
+## Web Worker 的局限性
 
 令人沮丧的是，Web Workers 不能够访问一些非常关键的 JavaScript  功能：
 
