@@ -2,7 +2,7 @@
 
 > 原文请查阅[这里](https://blog.sessionstack.com/how-javascript-works-the-building-blocks-of-web-workers-5-cases-when-you-should-use-them-a547c0757f6a)，略有删减，本文采用[知识共享署名 4.0 国际许可协议](http://creativecommons.org/licenses/by/4.0/)共享，BY [Troland](https://github.com/Troland)。
 
-**这是  JavaScript 工作原理的第七章。**
+**这是 JavaScript 工作原理的第七章。**
 
 现在，我们将会剖析 Web Workers：我们将会综合比较不同类型的 workers，如何组合运用他们的构建模块来进行开发以及不同场景下各自的优缺点。最后，我们将会介绍 5 个 Web Workder 的使用场景。
 
@@ -139,7 +139,7 @@ Shared workers 可以被运行在同源的所有进程访问（不同的浏览�
 
 ## Service Workers
 
-一个 Service Worker 是一个事件驱动的 worker，它由源和路径组成。它可以控制它关联的网页，解释且修改导航，资源的请求，以及一种非常细粒度的方式来缓存资源以让你非常灵活地控制程序在某些情况下的行为（比如网络不可用）。
+Service Worker 是一个由事件驱动的 worker，它由源和路径组成。它可以控制它关联的网页，解释且修改导航，资源的请求，以及一种非常细粒度的方式来缓存资源以让你非常灵活地控制程序在某些情况下的行为（比如网络不可用）。
 
 ![](https://user-images.githubusercontent.com/1475173/40270197-7267d41e-5bbb-11e8-9bd3-978cab346084.png)
 
@@ -419,4 +419,4 @@ self.addEventListener('message', function(e) {
 </html>
 ```
 
-以上是通过 canvas 来获取图片的图片数据，那么是否有其它方法呢？肯定有的啦，动下脑筋吧少年。
+以上是通过 canvas 来获取图片数据，那么是否有其它方法呢？肯定有的啦，动下脑筋吧少年。
