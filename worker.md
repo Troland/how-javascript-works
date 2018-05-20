@@ -333,7 +333,7 @@ self.addEventListener('message', function(e) {
 
 * 拼写检查：一个基本的拼写检测器是这样工作的－程序会读取一个包含拼写正确的单词列表的字典文件。字典会被解析成一个搜索树以加快实际的文本搜索。当检查器检查一个单词的时候，程序会在预构建搜索树中进行检索。如果在树中没有检索到，则会通过提供替代的字符为用户提供替代的拼写并检测单词是否是有效－是否是用户需要的单词。这个检索过程中的所有工作都可以交由 Web Worker 来完成，这样用户就只需输入单词和语句而不会阻塞 UI，与此同时 worker 会处理所有的搜索和服务建议。
 
-在 [SessionStack](https://www.sessionstack.com/?utm_source=medium&utm_medium=source&utm_content=javascript-series-web-workers-outro) 中对于我们来说性能和可靠性是至关重要的。之所以这么重要的原因是一旦把 SessionStack 整合进网络应用，它就会开始收集从 DOM 变化，用户交互到网络请求，未处理异常和调试信息的所有一切信息。所有的数据都是即时传输到我们的服务器的，这样就允许你以视频的方式重放网络应用中的所有问题以及观察用户端产生的一切问题。所有的一切都只会给你的程序带来极小的延迟且没有任何的性能开销。
+在 [SessionStack](https://www.sessionstack.com/?utm_source=medium&utm_medium=source&utm_content=javascript-series-web-workers-outro) 中对于我们来说性能和可靠性是至关重要的。之所以这么重要的原因是一旦把 SessionStack 整合进网络应用，它就会开始收集从 DOM 变化，用户交互到网络请求，未处理异常和调试信息的所有一切信息。所有的数据都是即时传输到我们的服务器的，这样就允许你以视频的方式重放网络应用中的所有问题以及观察用户端产生的一切问题。所有的一切都只会给程序带来极小的延迟且没有任何的性能开销。
 
 这就是为什么我们使用 Web Workers 来处理监视库和播放器的逻辑的原因，因为 Web Workers 会帮我们处理诸如使用哈希来验证数据完整性，渲染等 CPU 密集型的任务。
 
