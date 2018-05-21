@@ -368,11 +368,13 @@ self.addEventListener('message', function(e) {
           const ctx = $canvas.getContext('2d');
           const width = this.width;
           const height = this.height;
+          let imageData;
           
           $canvas.width = width;
           $canvas.height = height;
           ctx.drawImage(image, 0, 0, width, height);
-          resolve({image, ctx.getImageData(0, 0, $canvas.width, $canvas.height)});
+          imageData = ctx.getImageData(0, 0, $canvas.width, $canvas.height);
+          resolve({image, imageData});
         };
 
         image.onerror = function() {
