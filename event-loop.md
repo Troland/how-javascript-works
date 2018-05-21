@@ -20,7 +20,7 @@
 
 这很丑陋且它完全摧毁了程序的用户体验。
 
-![](./assets/1_WlMXK3rs_scqKTRV41au7g.jpeg)
+![未响应](https://user-images.githubusercontent.com/1475173/40287991-b76a14b8-5ce3-11e8-9808-242e1c6501ba.jpeg)
 
 ## JavaScript 程序组件
 
@@ -110,7 +110,7 @@ second
 
 让我们看下如下图示：
 
-![](./assets/1_4lHHyfEhVB0LnQ3HlhSs8g.png)
+![内存图示](https://user-images.githubusercontent.com/1475173/40288048-fc615fc2-5ce3-11e8-9f1e-e96489238538.png)
 
 你可以在之前的[文章](https://github.com/Troland/how-javascript-works/blob/master/overview.md)中阅读更多关于动态内存管理和调用栈的信息。
 
@@ -118,7 +118,7 @@ second
 
 说了那么多，事件循环到底是啥？
 
-![](./assets/1_KGBiAxjeD9JT2j6KDo0zUg.png)
+![事件循环图示](https://user-images.githubusercontent.com/1475173/40288117-31e5b440-5ce4-11e8-98fa-d4c10c1723f7.png)
 
 事件循环只有一项简单的工作－监测调用栈和回调队列。如果调用栈是空的，它会从回调队列中取得第一个事件然后入栈，并有效地执行该事件。
 
@@ -136,71 +136,71 @@ console.log('Bye');
 
 1.空状态。浏览器控制台是空的，调用栈也是空的。
 
-![](./assets/1_9fbOuFXJHwhqa6ToCc_v2A.png)
+![空状态图例](https://user-images.githubusercontent.com/1475173/40288154-62498904-5ce4-11e8-9396-1aa895d305b9.png)
 
 2.`console.log('Hi')` 入栈。
 
-![](./assets/1_dvrghQCVQIZOfNC27Jrtlw.png)
+![入栈图例](https://user-images.githubusercontent.com/1475173/40288182-88b8845a-5ce4-11e8-8a5c-98a5f4cd47a4.png)
 
 3.执行 `console.log('Hi')`。
 
-![](./assets/1_yn9Y4PXNP8XTz6mtCAzDZQ.png)
+![](https://user-images.githubusercontent.com/1475173/40288225-b032e75a-5ce4-11e8-824c-97df3bc9c73d.png)
 
 4.`console.log('Hi')` 出栈
 
-![](./assets/1_iBedryNbqtixYTKviPC1tA.png)
+![](https://user-images.githubusercontent.com/1475173/40288716-1d16588c-5ce7-11e8-82c9-193086d00bbc.png)
 
 5. `setTimeout(function cb1() { ... })` 入栈。
 
-![](./assets/1_HIn-BxIP38X6mF_65snMKg.png)
+![](https://user-images.githubusercontent.com/1475173/40288795-88ca548e-5ce7-11e8-9469-9b6e01dca718.png)
 
 6.执行 `setTimeout(function cb1() { ... })`，浏览器创建定时器作为网页 API 的一部分并将会为你处理倒计时。
 
-![](./assets/1_vd3X2O_qRfqaEpW4AfZM4w.png)
+![](https://user-images.githubusercontent.com/1475173/40288812-a1b4dc3a-5ce7-11e8-9556-30dbb52a6aa0.png)
 
 7.`setTimeout(function cb1() { ... })` 执行完毕并出栈。
 
-  ![](./assets/1__nYLhoZPKD_HPhpJtQeErA.png)
+  ![](https://user-images.githubusercontent.com/1475173/40288835-b9e7cf92-5ce7-11e8-8874-15c17676a82e.png)
 
 8.`console.log('Bye')` 入栈。
 
-  ![](./assets/1_1NAeDnEv6DWFewX_C-L8mg.png)
+  ![](https://user-images.githubusercontent.com/1475173/40288846-da4959fe-5ce7-11e8-8248-3cc7759a68e8.png)
 
 9.执行 `console.log('Bye')`。
 
-![](./assets/1_UwtM7DmK1BmlBOUUYEopGQ.png)
+![](https://user-images.githubusercontent.com/1475173/40288872-fcfc690a-5ce7-11e8-83fb-79ed9f560531.png)
 
 10.`console.log('Bye')` 出栈。
 
-![](./assets/1_-vHNuJsJVXvqq5dLHPt7cQ.png)
+![](https://user-images.githubusercontent.com/1475173/40288907-2a75d696-5ce8-11e8-94bd-8550da83aaac.png)
 
 11.至少 5 秒之后，定时器结束运行并把 `cb1` 回调添加到回调队列。
 
-   ![](./assets/1_eOj6NVwGI2N78onh6CuCbA.png)
+   ![](https://user-images.githubusercontent.com/1475173/40288953-57f94c9c-5ce8-11e8-8adc-2a2ea2e1f5f1.png)
 
 12.事件循环从回调队列中获得 `cb1` 函数并且将其入栈。
 
-![](./assets/1_jQMQ9BEKPycs2wFC233aNg.png)
+![](https://user-images.githubusercontent.com/1475173/40288902-289c42ba-5ce8-11e8-973b-2af55f8688e2.png)
 
 13.运行 `cb1` 函数并将 `console.log('cb1')` 入栈。
 
-![](./assets/1_hpyVeL1zsaeHaqS7mU4Qfw.png)
+![](https://user-images.githubusercontent.com/1475173/40288904-297d47ba-5ce8-11e8-86fd-0c3ef759f41c.png)
 
 14.执行 `console.log('cb1')`。
 
-![](./assets/1_lvOtCg75ObmUTOxIS6anEQ.png)
+![](https://user-images.githubusercontent.com/1475173/40288906-2a2b8bfe-5ce8-11e8-970a-2419ebf96971.png)
 
 15.`console.log('cb1')` 出栈。
 
-![](./assets/1_Jyyot22aRkKMF3LN1bgE-w.png)
+![](https://user-images.githubusercontent.com/1475173/40288901-2850356e-5ce8-11e8-906b-3102bb29496c.png)
 
 16.`cb1` 出栈
 
-![](./assets/1_t2Btfb_tBbBxTvyVgKX0Qg.png)
+![](https://user-images.githubusercontent.com/1475173/40289120-2a506694-5ce9-11e8-8de6-0518f8278059.png)
 
 录像快速回放：
 
-![](./assets/1_TozSrkk92l8ho6d8JxqF_w.gif)
+![](https://user-images.githubusercontent.com/1475173/40289266-e9afffc2-5ce9-11e8-9377-2acafe329f55.gif)
 
 令人感兴趣的是，ES6 规定事件循环如何工作的，这意味着从技术上讲，它在 JS 引擎负责的范围之内，而 JS 引擎将不再只是扮演着宿主环境的角色。ES6 中 Promise 的出现是导致改变的主要原因之一，因为 ES6 要求有权限直接细粒度地控制事件循环队列中的调度操作(之后会深入探讨)。
 
@@ -624,7 +624,7 @@ var loadData = async function() {
 
 更为重要的是，所有的主流浏览器都支持 async/await。
 
-![](./assets/0_z-A-JIe5OWFtgyd2.png)
+![](https://user-images.githubusercontent.com/1475173/40289389-98f3ab96-5cea-11e8-9e81-a8a3c1eec6d3.png)
 
 如果该兼容性不符合你的需求，你可以使用诸如 [Babel](https://babeljs.io/docs/plugins/transform-async-to-generator/) 和 [TypeScript](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-2-3.html) 的 JS 转译器来转换为自己需要的兼容程度。
 
