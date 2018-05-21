@@ -10,7 +10,7 @@
 
 正如 [GitHut stats](http://githut.info/) 所显示的那样，JavaScript 的活跃库和总推送数在 Github 排名第一。其它方面的表现也不会比其它语言落下太多。
 
-![](./assets/1_Zf4reZZJ9DCKsXf5CSXghg.png)
+![](https://user-images.githubusercontent.com/1475173/40289980-03f75c32-5cee-11e8-8b88-6920c354c87e.png)
 
 ([点击查看最新 Github 语言统计](https://madnight.github.io/githut/))
 
@@ -32,12 +32,12 @@
 
 谷歌 V8 引擎是流行的 JavaScript 引擎之一。V8 引擎在诸如 Chrome 和 Node.js 内部使用。这里有一个简单的视图来描绘其大概。
 
-![](./assets/1_OnH_DlbNAPvB9KLxUCyMsA.png)
+![](https://user-images.githubusercontent.com/1475173/40290010-30290030-5cee-11e8-9bb1-3fb6faae7359.png)
 
 引擎包括两个主要组件：
 
 * 动态内存管理 － 在这里分配内存
-* 调用栈－这里你的代码执行即是你的堆栈结构
+* 调用栈－这里代码执行即是你的堆栈结构
 
 ## 运行时
 
@@ -47,7 +47,7 @@
 
 事实上这个情况有点复杂呃。。
 
-![](./assets/1_4lHHyfEhVB0LnQ3HlhSs8g.png)
+![](https://user-images.githubusercontent.com/1475173/40288048-fc615fc2-5ce3-11e8-9f1e-e96489238538.png)
 
 所以，除了引擎但是实际上还有更多其它方面的东西。有被称为 Web API 的东西，这些 Web API 是由浏览器提供的，比如 DOM,AJAX,setTimeout 以及其它。
 
@@ -76,7 +76,7 @@ printSquare(5);
 
 当引擎开始执行这段代码的时候，调用栈会被清空。之后，产生如下步骤：
 
-![](./assets/1_Yp1KOt_UJ47HChmS9y7KXw.png)
+![](https://user-images.githubusercontent.com/1475173/40290072-74dee8fc-5cee-11e8-97bf-23d11571e8a6.png)
 
 调用栈中的每个入口被称为堆栈结构。
 
@@ -100,9 +100,9 @@ start();
 
 如果在 Chrome 中执行（假设代码在 foo.js 的文件中），将会产生如下的堆栈追踪：
 
-![](./assets/1_T-W_ihvl-9rG4dn18kP3Qw.png)
+![](https://user-images.githubusercontent.com/1475173/40290093-8c12a194-5cee-11e8-8efa-c5c0bee2df74.png)
 
-"堆栈溢出"－当你达到最大调用栈大小的时候发生。这种情况相当容易发生，特别是当你使用递归而没有仔细地检查你的代码的时候。查看下如下代码：
+"堆栈溢出"－当你达到最大调用栈大小的时候发生。这种情况相当容易发生，特别是当你使用递归而没有仔细地检查代码的时候。查看下如下代码：
 
 ```
 function foo() {
@@ -114,11 +114,11 @@ foo();
 
 当引擎开始执行这段代码的时候，它开始调用 foo 函数。这个函数，然而，会递归并开始调用其自身而没有任何结束条件。所以在每步执行过程中，调用堆栈会反复地添加同样的函数。执行过程如下所示：
 
-![](./assets/1_AycFMDy9tlDmNoc5LXd9-g.png)
+![](https://user-images.githubusercontent.com/1475173/40290111-a126eb12-5cee-11e8-8fe5-ff36434c7013.png)
 
 在某一时刻，然而，调用堆栈中的函数调用次数超过了调用堆栈的实际大小，这样浏览器决定抛出错误的动作，如下所示：
 
-![](./assets/1_e0nEd59RPKz9coyY8FX-uw.png)
+![](https://user-images.githubusercontent.com/1475173/40290127-b46b631a-5cee-11e8-8437-9e42419b2a48.png)
 
 在单线程中运行代码会相当轻松因为你不用处理多线程环境中产生的一些复杂情况，比如死锁。
 
@@ -128,15 +128,14 @@ foo();
 
 当你在调用栈中有函数为了完成运行需要消耗大量的时间的时候会发生什么？例如，想象一下你想要在浏览器用 JavaScript 来执行一些复杂的图像转化。
 
-你或许会问－为什么这也是个问题？问题是这样的当调用栈有函数需要执行，浏览器实际上不能做其它任何事－它被阻塞了。这意味着浏览器不能够执行渲染，它不能够运行其它代码，它卡住了。如果你想要在你的 app 中拥有酷炫的流畅 UI 体验，这将会是个问题。
+你或许会问－为什么这也是个问题？问题是这样的当调用栈有函数需要执行，浏览器实际上不能做其它任何事－它被阻塞了。这意味着浏览器不能够执行渲染，它不能够运行其它代码，它卡住了。如果你想要在 app 中拥有酷炫的流畅 UI 体验，这将会是个问题。
 
-这不会是唯一的问题。一旦你的浏览器开始在调用栈中执行如此多的任务，浏览器将会在相当一段时间内停止交互。大多数浏览器会抛出一个错误，询问你是否关闭网页。
+这不会是唯一的问题。一旦浏览器开始在调用栈中执行如此多的任务，浏览器将会在相当一段时间内停止交互。大多数浏览器会抛出一个错误，询问你是否关闭网页。
 
-![](./assets/1_WlMXK3rs_scqKTRV41au7g.jpeg)
+![](https://user-images.githubusercontent.com/1475173/40287991-b76a14b8-5ce3-11e8-9808-242e1c6501ba.jpeg)
 
 现在，这并不是最好的用户体验，难道不是吗？
 
 因此，如何不阻塞 UI 且不让浏览器停止响应来执行运行缓慢的代码呢？使用异步回调。
 
 这将会在 『JavaScript 工作原理』 第二章：『在V8 引擎中如何写最佳代码的 5 条小技巧』中进行详细阐述。
-
