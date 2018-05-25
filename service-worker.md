@@ -14,7 +14,7 @@
 
 ## 概述
 
-若想理解 Service Workers 相关的一切，首先你应该阅读一下之前发布的有关 [Web Workers](https://github.com/Troland/how-javascript-works/blob/master/worker.md) 的文章。
+若想理解 Service Workers 相关的一切，你首先应该阅读一下之前发布的有关 [Web Workers](https://github.com/Troland/how-javascript-works/blob/master/worker.md) 的文章。
 
 大体上，Service Worker 是一种 Web Worker，更准确地说，它更像是一个 [Shared Worker](https://developer.mozilla.org/en-US/docs/Web/API/SharedWorker)。
 
@@ -58,7 +58,7 @@ if ('serviceWorker' in navigator) {
 
 以上代码首先检查当前执行环境是否支持 Service Worker API。如果是，则注册  `/sw.js` Service Worker。
 
-你可以在每次页面加载的时候，任意调用 `register()`－浏览器会检测 `service worker` 是否已经注册从而进行适当地处理。
+可以在每次页面加载的时候，任意调用 `register()`－浏览器会检测 `service worker` 是否已经注册从而进行适当地处理。
 
 `register()` 方法里面需要特别注意的地方即 Service Worker 文件地址。当前示例是在服务器根目录下。意即 service worker 会作用于整个源地址上。换句话说，即 service worker 会接收到该域名下所有页面 的 `fetch` 事件。如果注册 service worker 的文件路径是 `/example/sw.js` ，那么 service worker 会接收到所有页面路径以 `/example/` 为开头的 URL 地址的 `fetch` 事件（比如 `/example/page1/` `/example/page2/`）。
 
@@ -66,11 +66,11 @@ if ('serviceWorker' in navigator) {
 
 这也就回答了为什么要在 load 事件之后注册 Service Worker。这不是必须的，但是强烈推荐这么做。
 
-为什么要这样做呢？假设用户第一次访问你的网络应用。现在还没有注册 service worker，而且浏览器无法事先知晓是否会最终安装它。如果进行安装，则浏览器将会为增加的线程开辟额外的 CPU 和内存，而这些资源原本是用来渲染网页的。
+为什么要这样做呢？假设用户第一次访问网络应用。现在还没有注册 service worker，而且浏览器无法事先知晓是否会最终安装它。如果进行安装，则浏览器将会为增加的线程开辟额外的 CPU 和内存，而这些资源原本是用来渲染网页的。
 
 **参考下[这里](https://javascript.info/onload-ondomcontentloaded)，`load ` 事件会加载完所有的资源比如图片，样式之后触发。**
 
-最终的结果即是如果在页面中安装 Service Worker，你将有可能导致页面延迟加载和渲染－不能够让用户尽快地访问网页。
+最终的结果即是如果在页面中安装 Service Worker，将有可能导致页面延迟加载和渲染－不能够让用户尽快地访问网页。
 
 需要注意的是这只会发生在第一次访问页面的时候。后续的页面访问不会被 Service Worker 的安装所影响。一旦在首次访问页面的时候激活了 Service Worker ，它就可以处理后续的页面访问所触发的页面加载/缓存事件。这是正确的，Service Worker 需要加载好以处理有限的网络带宽。
 
@@ -120,13 +120,13 @@ self.addEventListener('install', function(event) {
 });
 ```
 
-如果文件都成功缓存，则 service worker 安装成功。如果任意文件下载失败，那么 service worker 将会安装失败。因此，请注意你所要缓存的文件。
+如果文件都成功缓存，则 service worker 安装成功。如果任意文件下载失败，那么 service worker 将会安装失败。因此，请注意需要缓存的文件。
 
 处理 `install` 事件完全是可选，当不进行处理的时候，跳过以上几个步骤即可。
 
 ## 缓存运行时请求
 
-该部分才是干货。这里你可以看到如何拦截请求然后返回已创建的缓存（以及创建新的缓存）。
+该部分才是干货。在这里可以看到如何拦截请求然后返回已创建的缓存（以及创建新的缓存）。
 
 当 Service Worker 安装完成之后，用户会导航到另一个页面或者刷新当前页面，Service Worker 将会收到 fetch 事件。这里有一个演示了如何返回缓存的静态资源或执行一个新的请求并缓存返回结果的过程的示例：
 
@@ -181,7 +181,7 @@ self.addEventListener('fetch', function(event) {
 
 ## 更新 Service Worker
 
-当用户访问你的网络应用的时候，浏览器会在后台试图重新下载包含 Service Worker 代码的 `.js` 文件。
+当用户访问网络应用的时候，浏览器会在后台试图重新下载包含 Service Worker 代码的 `.js` 文件。
 
 如果下载下来的文件和当前的 Service Worker 代码文件有一丁点儿不同，浏览器会认为文件发生了改变并且会创建一个新的 Service Worker。
 
@@ -193,7 +193,7 @@ self.addEventListener('fetch', function(event) {
 
 ## 从缓存中删除数据
 
-`activate` 回调中最为常见的步骤即缓存管理。因为若想删除安装步骤中老旧的缓存，而这又会导致 Service Workers 无法获取该缓存中的文件数据，所以，这时候你需要进行缓存管理。
+`activate` 回调中最为常见的步骤即缓存管理。因为若想删除安装步骤中老旧的缓存，而这又会导致 Service Workers 无法获取该缓存中的文件数据，所以，这时候需要进行缓存管理。
 
 这里有一个示例演示如何把未在白名单中的缓存删除（该情况下，以 `page-1` 或者 `page-2` 来进行命名）：
 
@@ -221,11 +221,11 @@ self.addEventListener('activate', function(event) {
 
 ## HTTPS 要求
 
-当处于开发阶段的时候，你可以通过 localhost 来使用 Service Workers ，但当处于发布环境的时候，你必须部署好 HTTPS（这也是使用 HTTPS 的最后一个原因了）。
+当处于开发阶段的时候，可以通过 localhost 来使用 Service Workers ，但当处于发布环境的时候，必须部署好 HTTPS（这也是使用 HTTPS 的最后一个原因了）。
 
-使用 Service Worker，你可以劫持网络连接和伪造响应数据。如果不使用 HTTPS，你的网络应用会容易遭受[中间人](https://en.wikipedia.org/wiki/Man-in-the-middle_attack) 攻击。
+可以利用 Service Worker劫持网络连接和伪造响应数据。如果不使用 HTTPS，网络应用会容易遭受[中间人](https://en.wikipedia.org/wiki/Man-in-the-middle_attack) 攻击。
 
-为了保证安全，你必须通过 HTTPS 在页面上注册 Service Workers，这样你就可以保证浏览器接收到的 Service Worker 没有在传输过程中被篡改。
+为了保证安全，必须通过 HTTPS 在页面上注册 Service Workers，这样就可以保证浏览器接收到的 Service Worker 没有在传输过程中被篡改。
 
 ## 浏览器支持
 
@@ -242,7 +242,7 @@ Service Workers 拥有良好的浏览器兼容性。
 Service Worker 独有的功能：
 
 * 推送通知－允许用户选择定时接收网络应用的推送更新
-* 后台同步－允许你延迟操作直到网络连接稳定之后。这样你就可以保证用户即时发送数据。
+* 后台同步－允许延迟操作直到网络连接稳定之后。这样就可以保证用户即时发送数据。
 * 定期同步（以后支持）－提供了管理进行定期后台数据同步的功能
 * **Geofencing** （以后支持）－可以自定义参数，也即 **geofences** ，该参数包含着用户所感兴趣的地区。当设备穿过某片地理围栏的时候会收到通知，这就能够让你基于用户的地理位置来提供有用的用户体验。
 
@@ -250,9 +250,9 @@ Service Worker 独有的功能：
 
 我们持续不断地工作以让 SessionStack 的交互体验尽可能流畅，优化页面加载时间和响应时间。
 
-当在 [SessionStack](https://www.sessionstack.com/) 上重放用户会话或者实时流播放，SessionStack 界面会从服务器持续抓取数据从而为用户创造一个类缓冲的使用体验（类似视频缓冲那种）。再详细了解一些原理即一旦你在你的网络应用中集成 SessionStack 库，它将会持续收集诸如 DOM 变化，用户交互，网络请求，未处理异常以及调试信息的数据。
+当在 [SessionStack](https://www.sessionstack.com/) 上重放用户会话或者实时流播放，SessionStack 界面会从服务器持续抓取数据从而为用户创造一个类缓冲的使用体验（类似视频缓冲那种）。再详细了解一些原理即一旦在网络应用中集成 SessionStack 库，它将会持续收集诸如 DOM 变化，用户交互，网络请求，未处理异常以及调试信息的数据。
 
-当重放或者实时观看一个会话的时候，SessionStack 会返回所有数据以便你观察发生于用户浏览器的所有事件。（视觉上和技术上的）。所有的这一切都是即时发生的，因为我们不想让用户等待。
+当重放或者实时观看一个会话的时候，SessionStack 会返回所有数据以方便观察发生于用户浏览器的所有事件。（视觉上和技术上的）。所有的这一切都是即时发生的，因为我们不想让用户等待。
 
 由于数据是由前端抓取的，这个时候就可以使用 Service Workers 来处理类似播放器重载和再次流传输所有数据的情形。处理缓慢的网络连接也是非常重要的。
 
