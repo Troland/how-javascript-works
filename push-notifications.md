@@ -314,4 +314,4 @@ nodejs 可以使用[这里](https://github.com/web-push-libs/web-push)的库来�
 
 一张流程图来表示吧：
 
-![](https://user-images.githubusercontent.com/1475173/40720773-6d543836-644a-11e8-9d38-38a99d7d0175.png)
+![](https://user-images.githubusercontent.com/1475173/40726275-f9e70f5a-6457-11e8-9f32-19cf0930aba8.png)
