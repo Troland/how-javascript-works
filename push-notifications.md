@@ -1,4 +1,4 @@
-# 网页推送通知机制
+# 网页消息推送通知机制
 
 > 原文请查阅[这里](https://blog.sessionstack.com/how-javascript-works-the-mechanics-of-web-push-notifications-290176c5c55d)，略有删减，本文采用[知识共享署名 4.0 国际许可协议](http://creativecommons.org/licenses/by/4.0/)共享，BY [Troland](https://github.com/Troland)。
 

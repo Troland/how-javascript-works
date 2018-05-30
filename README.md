@@ -14,7 +14,7 @@
 - 第六章：[WebAssembly 对比 JavaScript 及其使用场景](webassembly.md)
 - 第七章：[Web Workers 分类及 5 个使用场景](worker.md)
 - 第八章：[Service Workers，生命周期及其使用场景](service-worker.md)
-- 第九章：[网页推送通知机制](push-notifications.md)
+- 第九章：[网页消息推送通知机制](push-notifications.md)
 
 ## 版权说明
 
