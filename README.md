@@ -15,6 +15,7 @@
 - 第七章：[Web Workers 分类及 5 个使用场景](worker.md)
 - 第八章：[Service Workers，生命周期及其使用场景](service-worker.md)
 - 第九章：[网页消息推送通知机制](push-notifications.md)
+- 第十章：[使用 MutationObserver 监测 DOM 变化](mutation-observer.md)
 
 ## 版权说明
 
