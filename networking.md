@@ -8,7 +8,7 @@
 
 ## 网络简史
 
-49 年前，ARPAnet 诞生了。它是早期的[报文分组交换网络](https://en.wikipedia.org/wiki/Packet_switching)及第一个实现 [TCP/IP 协议套件](https://en.wikipedia.org/wiki/Internet_protocol_suite)的网络。该网络连通了加利福亚大堂和斯坦福研究所。20 年后，Tim Berners-Lee 分发了一个后来为人所熟知的万维网的 『Mesh』草案。在 49 年的时间里，网络走过了一段漫长的旅程，从仅仅只是是两台电脑间交换数据报文到至少 7500 万台服务器，38 亿人使用互联以及 13 亿个网站。
+49 年前，ARPAnet 诞生了。它是早期的[报文分组交换网络](https://en.wikipedia.org/wiki/Packet_switching)及第一个实现 [TCP/IP 协议套件](https://en.wikipedia.org/wiki/Internet_protocol_suite)的网络。该网络连通了加利福亚大堂和斯坦福研究所。20 年后，Tim Berners-Lee 分发了一个后来为人所熟知的万维网的 『Mesh』草案。在 49 年的时间里，网络走过了一段漫长的旅程，从仅仅只是是两台电脑间交换数据报文到至少 7500 万台服务器，38 亿人使用互联网以及 13 亿个网站。
 
 ![](https://user-images.githubusercontent.com/1475173/41820447-a58217aa-7804-11e8-9fec-aa47a938ec42.jpeg)
 
