@@ -18,6 +18,7 @@
 - 第十章：[使用 MutationObserver 监测 DOM 变化](mutation-observer.md)
 - 第十一章：[渲染引擎及性能优化小技巧](rendering.md)
 - 第十二章：[网络层探秘及如何提高其性能和安全性](networking.md)
+- 第十三章：[CSS 和 JS 动画底层原理及如何优化其性能](animation.md)
 
 ## 版权说明
 
