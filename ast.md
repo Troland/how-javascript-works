@@ -35,23 +35,23 @@ function foo(x) {
 
 解析器会产生如下的 AST。
 
-![](/Users/Troland/repos/iwork/how-javascript-works/assets/0_mSOIiWpkctkD0Gfg.png)
+![](https://user-images.githubusercontent.com/1475173/42731809-9307a628-8847-11e8-86fa-5f36610d3a44.png)
 
 请注意，这里为了展示用只是解析器输出的简化版本。实际的 AST 要更加复杂。然而，这里的意思即了解一下运行源码之前的第一个步骤。可以访问 [AST Explorer](https://astexplorer.net/) 来查看实际的 AST 树。这是一个在线工具，你可以在上面写 JavaScript 代码，然后网站会输出目标代码的 AST。
 
 也许你会问为什么我得学习 JavaScript 解析器的工作原理。反正，浏览器会负责运行 JavaScript 代码。你有那么一丁点是正确的。以下图表展示了 JavaScript 运行过程中不同阶段的耗时。瞪大眼睛瞅瞅，也许你可以发现点有趣的东西。
 
-![](/Users/Troland/repos/iwork/how-javascript-works/assets/0_eEArxn147Ev8xf5n.png)
+![](https://user-images.githubusercontent.com/1475173/42731808-92b9c048-8847-11e8-9f15-97a489246843.png)
 
 发现没？通常情况下，浏览器大概消耗了 15% 到 20% 的总运行时间来解析 JavaScript.我没有具体统计过这些数值。这些统计数据来自于现实世界中程序和网站的各种 JavaScript 使用姿势。 现在也许 15% 看起来不是很多，但相信我，很多的。一个典型的单页程序会加载大约 0.4M 的 JavaScript 代码，然后消耗掉浏览器大概 370ms 的时间来进行解析。也许你会又说，这也不是很多嘛。本身花费的时间并不多。但记住了，这只是把 JavaScript 代码转化为 ASTs 所消耗的时间。其中不包含运行本身的时间或者页面加载期间其它诸如 [CSS 和 HTML](https://blog.sessionstack.com/how-javascript-works-the-rendering-engine-and-tips-to-optimize-its-performance-7b95553baeda) 渲染的过程的耗时。这仅仅只是桌面浏览器所面临的问题。移动浏览器的情况会更加复杂。一般情况下，手机移动浏览器解析代码的时间是桌面浏览器的 2-5 倍。
 
-![](/Users/Troland/repos/iwork/how-javascript-works/assets/0_3R6-AyKY1831P10d.jpeg)
+![](https://user-images.githubusercontent.com/1475173/42731812-93f43a24-8847-11e8-8f46-ed0b3cf0f021.jpeg)
 
 以上图表展示了不同移动和桌面浏览器解析 1MB JavaScript 代码所消耗的时间。
 
 另外，为了获得更多类原生的用户体验而把越来越多的业务逻辑堆积在前端，网页程序变得越来越复杂。网页程序越来越胖，都快走不动了。你可以轻易地想到网络应用受到的性能影响。只需打开浏览器开发者工具，然后使用该工具来检测解析，编译及其它发生于浏览器中直到页面完全加载所消耗的时间。
 
-![](/Users/Troland/repos/iwork/how-javascript-works/assets/0_A5ucCHOZsxXyHMfN.jpeg)
+![](https://user-images.githubusercontent.com/1475173/42731813-944806e0-8847-11e8-8410-4dee15303e3a.jpeg)
 
 不幸的是，移动浏览器没有开发者工具来进行性能检测。不用担心。因为有 [DeviceTiming](https://github.com/danielmendel/DeviceTiming) 工具。它可以用来帮助检测受控环境中脚本的解析和运行时间。它通过插入代码来封装本地代码，这样每当从不同设备访问的时候，可以本地测量解析和运行时间。
 
@@ -107,7 +107,7 @@ function foo() {
 
 调用 console.log 参数为之前函数调用的返回值。
 
-![](/Users/Troland/repos/iwork/how-javascript-works/assets/0_60xiqW7kPsQg5ssn.png)
+![](https://user-images.githubusercontent.com/1475173/42731811-93a3a834-8847-11e8-9935-aeee8592ee85.png)
 
 那么期间发生了什么呢？解析器发现了 bar 函数声明， baz 函数声明，调用 bar 函数及调用 console.log 函数。然而，解析器做了完全不相关的额外无用功即解析 bar 函数。为何不相关？因为函数 bar 从未被调用(或者至少不是在对应时间点上)。这只是一个简单示例及可能有些不同寻常，但是在现实生活的许多程序中，许多函数声明从未被调用过。
 
@@ -115,7 +115,7 @@ function foo() {
 
 所以之前的例子，解析器实际上会像如下这样解析：
 
-![](/Users/Troland/repos/iwork/how-javascript-works/assets/0_IN688nPbgu8zYETe.png)
+![](https://user-images.githubusercontent.com/1475173/42731810-9353f140-8847-11e8-86ee-934c4129865f.png)
 
 注意到这里仅仅只是确认函数 bar 声明。没有进入 bar 函数体。当前情况下，函数体只有一句简单的返回语句。然而，正如现代世界中的大多数程序那样，函数体可能会更加庞大，包含多个返回语句，条件语句，循环，变量声明甚至嵌套函数声明。由于函数从未被调用，这完全是在浪费时间和系统资源。
 
