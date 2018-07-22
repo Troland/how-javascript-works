@@ -32,4 +32,4 @@
 
 ## 来杯咖啡
 
-<img src="https://user-images.githubusercontent.com/1475173/39091700-c211409e-462c-11e8-8531-90261c9a7b73.png" width="300"/>
+[赞助我](https://user-images.githubusercontent.com/1475173/39091700-c211409e-462c-11e8-8531-90261c9a7b73.png)
