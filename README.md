@@ -21,6 +21,7 @@
 - 第十三章：[CSS 和 JS 动画底层原理及如何优化其性能](animation.md)
 - 第十四章：[解析，语法抽象树及最小化解析时间的 5 条小技巧](ast.md)
 - 第十五章：[类和继承及 Babel 和 TypeScript 代码转换探秘](transpiling.md)
+- 第十六章：[存储引擎及如何选择合适的存储 API](storage.md)
 
 ## 版权说明
 
