@@ -22,6 +22,7 @@
 - 第十四章：[解析，语法抽象树及最小化解析时间的 5 条小技巧](ast.md)
 - 第十五章：[类和继承及 Babel 和 TypeScript 代码转换探秘](transpiling.md)
 - 第十六章：[存储引擎及如何选择合适的存储 API](storage.md)
+- 第十七章：[Shadow DOM 内部构造及如何构建独立组件](shadow-dom.md)
 
 ## 版权说明
 
