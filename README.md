@@ -23,6 +23,8 @@
 - 第十五章：[类和继承及 Babel 和 TypeScript 代码转换探秘](transpiling.md)
 - 第十六章：[存储引擎及如何选择合适的存储 API](storage.md)
 - 第十七章：[Shadow DOM 内部构造及如何构建独立组件](shadow-dom.md)
+- 第十八章：[WebRTC 及点对点网络通信机制](webrtc.md)
+- 第十九章：[自定义元素探秘及构建可复用组件最佳实践](custom-element.md)
 
 ## 版权说明
 

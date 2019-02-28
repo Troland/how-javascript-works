@@ -1,4 +1,4 @@
-## Shadow DOM 内部构造及如何构建独立组件
+# Shadow DOM 内部构造及如何构建独立组件
 
 > 原文请查阅[这里](https://blog.sessionstack.com/how-javascript-works-the-internals-of-shadow-dom-how-to-build-self-contained-components-244331c4de6e)，略有删减，本文采用[知识共享署名 4.0 国际许可协议](http://creativecommons.org/licenses/by/4.0/)共享，BY [Troland](https://github.com/Troland)。
 
