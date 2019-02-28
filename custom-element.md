@@ -80,7 +80,7 @@ customElements.define('my-custom-element', class extends HTMLElement {
 
 因为浏览器可以在页面上正常进行渲染，所以使用了这样的嵌套结构。但是，这会使得 HTML 不具可读性且难以维护。
 
-因此，例如假设我们可能拥有如下的组件：
+因此，例如假设有如下组件：
 
 ![](https://user-images.githubusercontent.com/1475173/53549992-a446f380-3b70-11e9-9327-69d7b5458e4d.png)
 
@@ -489,7 +489,7 @@ if (supportsCustomElements) {
 
 * 把 JavaScript 和 CSS 样式整合入 HTML 元素
 * 允许开发者扩展已有的 HTML 元素(内置和其它自定义元素)
-* 不需要其它库或者框架的支持。只需要原生 JavaScript，HTML 和 CSS 还有可选的垫片库来支持老浏览器。
+* 不需要其它库或者框架的支持。只需要原生 JavaScript，HTML 和 CSS 还有可选的垫片库来支持旧浏览器。
 * 可以和其它网页组件功能无缝衔接(shadow DOM，模板，插槽等)。
 * 和浏览器开发者工具紧密集成在一起。
 * 使用已知的可访问功能
