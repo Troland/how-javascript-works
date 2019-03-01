@@ -62,7 +62,7 @@ WebRTC 标准并没有规定信令且没有在接口中实现是为了能够更�
 
 以下为 MDN 上描绘这一通信交换的图示：
 
-![](/Users/Troland/repos/iwork/how-javascript-works/assets/0_SXRTlnVxy2-hE9ZX.png)
+![](https://user-images.githubusercontent.com/1475173/53612111-fe48c700-3c0b-11e9-95d0-53efb4a1480b.png)
 
 ## 建立连接
 
@@ -151,7 +151,7 @@ navigator.getUserMedia({audio:true}, gotStream);
 
 如下为一张 WebRTC 图表展示 了 RTCPeerConnection 的角色：
 
-![](/Users/Troland/repos/iwork/how-javascript-works/assets/0_Nm9r_NLcAhJernmo.png)
+![](https://user-images.githubusercontent.com/1475173/53612109-fe48c700-3c0b-11e9-8066-92a0208cfc48.png)
 
 从 JavaScript 方面看 ，图中需要理解的主要方面即 `RTCPeerConnection` 把复杂的底层内部结构的复杂度抽象为一个接口给开发者。WebRTC 所使用的编码和协议为即使在不稳定的网络环境下仍然能够创建一个尽可能实时的通信而做了大量的工作：
 
@@ -227,13 +227,13 @@ document.querySelector("button#send").onclick = function (){
 
 如前所述，ICE 是用来连接诸如两个视频聊天客户的节点协议。一开始，ICE 会试图使用最低的可能的网络延迟即使用 UDP 来直接连接节点。在这一过程中，STUN 服务器只有一个任务:让位于 NAT 之后的节点能够找到其公共地址和端口。开发者可以查看一下可用的 [STUN 服务器](https://gist.github.com/zziuni/3741933)(Google 也有一堆) 名单。
 
-![](/Users/Troland/repos/iwork/how-javascript-works/assets/1_ONNxJHqmMTXB1Nuq3qTNXQ.png)
+![](https://user-images.githubusercontent.com/1475173/53612107-fdb03080-3c0b-11e9-823a-e6d793127cee.png)
 
 ## 检索连接候选
 
 若 UDP 失败，ICE 尝试 TCP，先 HTTP 后 HTTPS。如果直接连接失败-特殊情况下，由于企业 NAT 穿透和防火墙-ICE 使用中间(转发) TURN 服务器。换句话说，ICE 首先通过 UDP 使用 STUN 服务器来直接连接节点，若失败则后备使用 TURN 中继转发服务器。「检索连接候选者」指的是检索网络接口和端口的过程。
 
-![](/Users/Troland/repos/iwork/how-javascript-works/assets/1_0REL14sYPR34hY7yua6-PA.png)
+![](https://user-images.githubusercontent.com/1475173/53612108-fe48c700-3c0b-11e9-96d0-91317fbf2d68.png)
 
 ## 安全性
 
