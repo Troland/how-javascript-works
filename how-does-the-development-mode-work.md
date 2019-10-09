@@ -101,8 +101,10 @@ if (false) {
 这很糟糕，因为这会使网站加载和运行速度变慢。
 
 在过去两年中，情况有了显著的改善。例如，webpack添加了一个简单的模式选项，代替手动配置process.env.NODE_ENV。在开发模式网站React DevTools显示一个红色图标，这使得用户很容易发现甚至报告。
+
+![Image text](https://github.com/yuqifang/how-javascript-works/blob/master/assets/tool.png?raw=true)
  
-https://github.com/yuqifang/how-javascript-works/blob/master/assets/tool.png?raw=true
+
 
 像Create React App、Next/Nuxt、Vue CLI、Gatsby和其他一些特有的设置，将开发构建和生产构建分离成两个单独的命令使它变得更糟糕(例如，npm start和npm run build)。通常，只部署生产版本，因此开发人员不能再犯这个错误。
 
