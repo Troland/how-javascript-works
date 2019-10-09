@@ -102,7 +102,7 @@ if (false) {
 
 在过去两年中，情况有了显著的改善。例如，webpack添加了一个简单的模式选项，代替手动配置process.env.NODE_ENV。在开发模式网站React DevTools显示一个红色图标，这使得用户很容易发现甚至报告。
  
-
+https://github.com/yuqifang/how-javascript-works/blob/master/assets/tool.png?raw=true
 
 像Create React App、Next/Nuxt、Vue CLI、Gatsby和其他一些特有的设置，将开发构建和生产构建分离成两个单独的命令使它变得更糟糕(例如，npm start和npm run build)。通常，只部署生产版本，因此开发人员不能再犯这个错误。
 
@@ -173,8 +173,6 @@ react.production.min.js和react.development.js都没有任何process.env.NODE_EN
 这就是它的工作原理!
 
 我希望有一种更一流的方法可以做到这一点，而不依赖于惯例，但我们现在就在这里。如果模式在所有JavaScript环境中都是一个一流的概念，如果浏览器能够以某种方式在开发模式下运行一些代码，而开发模式本不应该运行这些代码，那就太好了。
-
-
 
 
 另一方面，一个项目中的约定如何能够在整个生态系统中传播，这是非常有趣的。EXPRESS_ENV于2010年成为NODE_ENV，并于2013年扩展到前端。这个解决方案也许并不完美，但是对于每个项目来说，采用它的成本要低于说服其他人做不同的事情的成本。这两种方式的对比，给我们上了宝贵的一课，理解这种动态是如何进行的，可以将成功的标准化尝试与失败区分开来。
