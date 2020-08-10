@@ -1,6 +1,6 @@
 # how-javascript-works
 
-> Contributors: [@Troland](https://github.com/Troland/)  [@moyuling](https://github.com/moyuling) [@三月](https://github.com/heaven2049)。
+> Contributors: [@Troland](https://github.com/Troland/) [@三月](https://github.com/heaven2049)。
 >
 > 本文是翻译介绍 JavaScript 的工作原理的，该系列原文还在更新中，原文见[这里](https://blog.sessionstack.com/tagged/tutorial)。
 
