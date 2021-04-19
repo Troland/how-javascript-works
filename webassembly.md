@@ -2,7 +2,7 @@
 
 > 原文请查阅[这里](https://blog.sessionstack.com/how-javascript-works-a-comparison-with-webassembly-why-in-certain-cases-its-better-to-use-it-d80945172d79)，略有改动，本文采用[知识共享署名 4.0 国际许可协议](http://creativecommons.org/licenses/by/4.0/)共享，BY [Troland](https://github.com/Troland)。
 
-**这是  JavaScript 工作原理的第六章。**
+**这是 JavaScript 工作原理的第六章。**
 
 现在，我们将会剖析 WebAssembly 的工作原理，而最重要的是它和 JavaScript 在性能方面的比对：加载时间，执行速度，垃圾回收，内存使用，平台 API 访问，调试，多线程以及可移植性。
 
@@ -142,7 +142,7 @@ WebAssembly 的最初版本主要是为了解决大量计算密集型的计算�
 
 在 [SessionStack](https://www.sessionstack.com/?utm_source=medium&utm_medium=blog&utm_content=Post-6-webassembly-outro) 我们一直致力于持续提升 JavaScript 的性能以编写高质量和高效的代码。我们的解决方案必须拥有闪电般的性能因为我们不能够影响用户程序的性能。一旦把 SessionStack 整合进网络应用或网站的生产环境，它会开始记录所有的一切：所有的 DOM 变化，用户交互，JavaScript 异常，堆栈追踪，失败的网络请求和调试数据。所有的这一切都是在生产环境中产生且没有影响到产品的任何交互和性能。我们必须极大地优化我们的代码并且尽可能地让它异步执行。
 
-我们不仅仅有库，还有其它功能！当你在 SessionStack 中重放用户会话，我们必须渲染问题产生时用户的浏览器所发生的一切，而且我们必须重构整个状态，允许你在会话时间线上来回跳转。为了使之成为可能，我们大量地使用异步操作，因为  JavaScript 中没有比这更好的替代选择了。
+我们不仅仅有库，还有其它功能！当你在 SessionStack 中重放用户会话，我们必须渲染问题产生时用户的浏览器所发生的一切，而且我们必须重构整个状态，允许你在会话时间线上来回跳转。为了使之成为可能，我们大量地使用异步操作，因为 JavaScript 中没有比这更好的替代选择了。
 
 有了 WebAssembly，我们就可以把大量的数据计算和渲染的工作移交给更加合适的语言来进行处理而把数据收集和 DOM 操作交给 JavaScript 进行处理。
 

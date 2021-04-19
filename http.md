@@ -2,7 +2,7 @@
 
 > 原文请查阅[这里](https://blog.sessionstack.com/how-javascript-works-deep-dive-into-websockets-and-http-2-with-sse-how-to-pick-the-right-path-584e6b8e3bf7)，略有改动，本文采用[知识共享署名 4.0 国际许可协议](http://creativecommons.org/licenses/by/4.0/)共享，BY [Troland](https://github.com/Troland)。
 
-**这是  JavaScript 工作原理的第五章。**
+**这是 JavaScript 工作原理的第五章。**
 
 现在，我们将会深入通信协议的世界，绘制并讨论它们的特点和内部构造。我们将会给出一份 WebSockets 和 HTTP/2 的快速比较 。在文末，我们将会分享如何正确地选择网络协议的一些见解。
 

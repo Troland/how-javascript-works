@@ -2,7 +2,7 @@
 
 > 原文请查阅[这里](https://blog.sessionstack.com/how-javascript-works-webrtc-and-the-mechanics-of-peer-to-peer-connectivity-87cc56c1d0ab)，略有删减，本文采用[知识共享署名 4.0 国际许可协议](http://creativecommons.org/licenses/by/4.0/)共享，BY [Troland](https://github.com/Troland)。
 
-**这是  JavaScript 工作原理第十八章。**
+**这是 JavaScript 工作原理第十八章。**
 
 ## 概述
 
@@ -16,7 +16,6 @@ WebRTC 本质上允许网页程序创建点对点通信，我们将会在随后�
 * 防火墙和 NAT 穿透
 * 信令，会话及协议
 * WebRTC 接口
-
 ## 点对点通信
 
 每个用户的网页浏览器必须按照如下步骤以实现通过网页浏览器进行的点对点通信：
@@ -72,11 +71,7 @@ WebRTC 标准并没有规定信令且没有在接口中实现是为了能够更�
 
 需要注意的是由于 WebRTC 的灵活性且事实上信令创建程序并没有在标准中指定，使用的技术不同，「信道」的概念和使用会有些许异同。事实上，一些协议并不要求「通道」机制来进行通信。
 
-
-
 本篇文章将会假设存在「信道」。
-
-
 
 一旦两个或者更多的点连接到相同的「信道」上，节点就可以进行通信和协商会话信息。这一过程和[发布/订阅模式](https://en.wikipedia.org/wiki/Publish%E2%80%93subscribe_pattern)有些许类似。大体上，初始点使用诸如会话初始协议(SIP)和 SDP 的信号协议发出一个「offer」的包。发起者等待连接到指定「通道」的接收者的「answer」应答。
 
@@ -108,7 +103,7 @@ WebRTC 中包含三种主要接口：
 
 可以通过 `navigator` 对象访问 MediaDevice 单例：
 
-```
+```js
 navigator.mediaDevices.getUserMedia(constraints)
 .then(function(stream) {
  /* 使用流 */
@@ -120,11 +115,11 @@ navigator.mediaDevices.getUserMedia(constraints)
 
 注意这里需要传入 `constraints` 对象以指定返回的媒体流类型。开发者可以进行各种配置，包括使用的摄像头(前置或后置)，帧频率，分辨率等等。
 
-从版本 25 起，基于 Chromium 的浏览器已经允许通过 `getUserMedia()` 获取的音频数据赋值给音频或者视频元素(但需要注意的是媒体元素默认值为空)。
+从版本 25 起，基于 Chromium 的浏览器已经允许通过 `getUserMedia()` 获取的音频数据赋值给音频或者视频元素(但需要注意的是媒体元素默认为静音)。
 
 可以把 `getUserMedia`作为[网页音频接口的输入节点](http://updates.html5rocks.com/2012/09/Live-Web-Audio-Input-Enabled)：
 
-```
+```js
 function gotStream(stream) {
     window.AudioContext = window.AudioContext || window.webkitAudioContext;
     var audioContext = new AudioContext();
@@ -153,14 +148,14 @@ navigator.getUserMedia({audio:true}, gotStream);
 
 ![](https://user-images.githubusercontent.com/1475173/53612109-fe48c700-3c0b-11e9-8066-92a0208cfc48.png)
 
-从 JavaScript 方面看 ，图中需要理解的主要方面即 `RTCPeerConnection` 把复杂的底层内部结构的复杂度抽象为一个接口给开发者。WebRTC 所使用的编码和协议为即使在不稳定的网络环境下仍然能够创建一个尽可能实时的通信而做了大量的工作：
+从 JavaScript 方面看 ，图中需要理解的主要方面即 `RTCPeerConnection` 把复杂的底层内部结构的复杂度抽象为一个接口给开发者。WebRTC 所使用的编解码器和协议为即使在不稳定的网络环境下仍然能够创建一个尽可能实时的通信而做了大量的工作：
 
-* 包丢失恢复
-* 回音消除
-* 网络自适应
-* 视频抖动缓冲
+* 丢包隐藏
+* 回波消除
+* 带宽自适应
+* 动态抖动缓冲
 * 自动增益控制
-* 噪声减少和压制
+* 降噪
 * 图像「清洁」
 
 ## RTCDataChannel
@@ -174,18 +169,18 @@ navigator.getUserMedia({audio:true}, gotStream);
 * 游戏
 * 实时文本聊天
 * 文件传输
-* 分布式网络
+* 去中心网络
 
 该接口有几项功能，充分利用 `RTCPeerConnection` 并创建强大和灵活的点对点通信：
 
 * 使用`RTCPeerConnection` 创建会话
 * 包含优先级的多个并发通道
 * 可靠和不可靠消息传递语义
-* 内置安全(DTLS)和消息堵塞控制
+* 内置安全(DTLS)和拥塞控制
 
 语法和已有的 WebSocket 类似，包含有 `send()` 方法和 `message` 事件：
 
-```
+```js
 var peerConnection = new webkitRTCPeerConnection(servers,
     {optional: [{RtpDataChannels: true}]}
 );
@@ -231,7 +226,7 @@ document.querySelector("button#send").onclick = function (){
 
 ## 检索连接候选
 
-若 UDP 失败，ICE 尝试 TCP，先 HTTP 后 HTTPS。如果直接连接失败-特殊情况下，由于企业 NAT 穿透和防火墙-ICE 使用中间(转发) TURN 服务器。换句话说，ICE 首先通过 UDP 使用 STUN 服务器来直接连接节点，若失败则后备使用 TURN 中继转发服务器。「检索连接候选者」指的是检索网络接口和端口的过程。
+若 UDP 失败，ICE 尝试 TCP: 先 HTTP 后 HTTPS。如果直接连接失败-特殊情况下，由于企业 NAT 穿透和防火墙-ICE 使用中间(转发) TURN 服务器。换句话说，ICE 首先通过 UDP 使用 STUN 服务器来直接连接节点，若失败则后备使用 TURN 中继转发服务器。「检索连接候选者」指的是检索网络接口和端口的过程。
 
 ![](https://user-images.githubusercontent.com/1475173/53612108-fe48c700-3c0b-11e9-96d0-91317fbf2d68.png)
 

@@ -2,7 +2,7 @@
 
 > 原文请查阅[这里](https://blog.sessionstack.com/how-javascript-works-inside-the-networking-layer-how-to-optimize-its-performance-and-security-f71b7414d34c)，略有改动，本文采用[知识共享署名 4.0 国际许可协议](http://creativecommons.org/licenses/by/4.0/)共享，BY [Troland](https://github.com/Troland)。
 
-**这是  JavaScript 工作原理的第十二章。**
+**这是 JavaScript 工作原理的第十二章。**
 
 正如在之前关于[渲染引擎的文章](https://github.com/Troland/how-javascript-works/blob/master/rendering.md)中所讲的那样，我们相信好的和伟大的 JavaScript 开发者之间的差别在于后者不仅仅只是理解了语言的具体细节还了解其内部构造和运行环境。
 
@@ -139,7 +139,7 @@ JavaScript 和 WebAssembly 禁止开发者操作单独的网络套接字的生�
 * 一直在请求中使用 『Connection: Keep-Alive』头信息。浏览器默认在请求头中添加 『Connection: Keep-Alive』。保证服务器也使用同样的机制。
 * 使用合适的 Cache-Control，Etag 和 Last-Modified 头信息以便节省浏览器的下载时间。
 * 花些时间调整和优化服务器。这是奥秘所在！注意这一过程是否针对每个程序和所传输的数据。
-* 一直使用 TLS!特别是如果程序中包含有任意类型的认证。
+* 一直使用 TLS !特别是如果程序中包含有任意类型的认证。
 * 研究浏览器所提供的安全策略并且在程序中强制实施。
 
 ## 扩展

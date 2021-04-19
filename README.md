@@ -1,6 +1,6 @@
 # how-javascript-works
 
-> Contributors: [@Troland](https://github.com/Troland/) [@三月](https://github.com/heaven2049)。
+> Contributors: [@Troland](https://github.com/Troland/) [@三月](https://github.com/heaven2049) [@chkaos](https://github.com/chkaos)。
 >
 > 本文是翻译介绍 JavaScript 的工作原理的，该系列原文还在更新中，原文见[这里](https://blog.sessionstack.com/tagged/tutorial)。
 
@@ -25,6 +25,7 @@
 - 第十七章：[Shadow DOM 内部构造及如何构建独立组件](shadow-dom.md)
 - 第十八章：[WebRTC 及点对点网络通信机制](webrtc.md)
 - 第十九章：[自定义元素探秘及构建可复用组件最佳实践](custom-element.md)
+- 第二十章：[异常及同步/异步代码异常处理最佳实践](exceptions.md)
 
 ## 版权说明
 
