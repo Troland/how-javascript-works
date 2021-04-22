@@ -759,7 +759,7 @@ loadData()
 
 不仅是程序本身还有库，书写异步 JavaScript 代码都是相当重要的。
 
-参考资源：
+## 参考资源
 
 * <https://github.com/getify/You-Dont-Know-JS/blob/master/async%20%26%20performance/ch2.md>
 * <https://github.com/getify/You-Dont-Know-JS/blob/master/async%20%26%20performance/ch3.md>

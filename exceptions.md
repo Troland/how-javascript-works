@@ -389,7 +389,7 @@ process
 ```
 在代码中妥善处理错误，这一点非常重要。了解未处理的错误同样重要，这样就可以确定优先级并相应地进行处理。
 
-## 参考资源:
+## 参考资源
 * https://www.sitepoint.com/exceptional-exception-handling-in-javascript/#:~:text=When%20a%20JavaScript%20statement%20generates,whatever%20function%20threw%20the%20exception.
 * https://www.tutorialspoint.com/es6/es6_error_handling.htm
 * https://www.javascripttutorial.net/es6/promise-error-handling/
