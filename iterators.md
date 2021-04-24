@@ -280,3 +280,7 @@ async function* makeFibonacciSequenceGenerator(endIndex = Infinity) {
 如果出于某种原因不想使用生成器但又想定义一个可迭代的对象，则必须使用 `Symbol.asyncIterator` 而不是上面的 `Symbol.iterator`。
 
 尽管与迭代器相比，生成器更易于创建和维护，但与普通函数相比，它们会更难调试。在异步上下文中尤其如此。可能有很多原因。一个例子是假如在外部调用 `throw()` 方法时，栈跟踪作用可能非常有限。在这种情况下几乎不可能正常调试，开发者可能需要要求用户提供更多的信息。
+
+## 参考资源
+* <https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Iterators_and_Generators>
+* <https://blog.bitsrc.io/explore-iterators-and-generators-in-javascript-ea4102015377>
