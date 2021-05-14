@@ -9,8 +9,8 @@
 - 第一章：[语言引擎，运行时和调用栈概述](overview.md)
 - 第二章：[如何在 V8 引擎中书写最优代码的 5 条小技巧](v8.md)
 - 第三章：[内存管理及如何处理 4 类常见的内存泄漏](memory-management.md)
-- 第四章：[事件循环及异步编程的出现和 5 种更好的 async/await 编程方式](event-loop.md) 
-- 第五章：[深入理解 WebSockets 和带有 SSE 机制的HTTP/2 以及正确的使用姿势](http.md) 
+- 第四章：[事件循环及异步编程的出现和 5 种更好的 async/await 编程方式](event-loop.md)
+- 第五章：[深入理解 WebSockets 和带有 SSE 机制的 HTTP/2 以及正确的使用姿势](http.md)
 - 第六章：[WebAssembly 对比 JavaScript 及其使用场景](webassembly.md)
 - 第七章：[Web Workers 分类及 5 个使用场景](worker.md)
 - 第八章：[Service Workers，生命周期及其使用场景](service-worker.md)
@@ -30,6 +30,7 @@
 - 第二十二章：[跨站请求伪造攻击及 7 种缓解策略](csrf.md)
 - 第二十三章：[迭代器及生成器高阶控制技巧](iterators.md)
 - 第二十四章：[密码学及中间人攻击处理](cryptography.md)
+- 第二十五章：[函数式编程及与其他范式对比](functional-programing.md)
 
 ## 版权说明
 
