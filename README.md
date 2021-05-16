@@ -31,6 +31,7 @@
 - 第二十三章：[迭代器及生成器高阶控制技巧](iterators.md)
 - 第二十四章：[密码学及中间人攻击处理](cryptography.md)
 - 第二十五章：[函数式编程及与其他范式对比](functional-programing.md)
+- 第二十六章：[3 种多态](polymorphism.md)
 
 ## 版权说明
 
