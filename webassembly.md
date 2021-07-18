@@ -20,11 +20,11 @@ WASM 让你在其中使用除 JavaScript 的语言以外的语言（比如 C, C+
 
 为了加载 JavaScript，浏览器必须加载所有文本格式的 js 文件。
 
-浏览器会更加快速地加载 WebAssembly，因为 WebAssembly 只会传输已经编译好的 wasm 文件。而且 wasm 是底层的类汇编语言，具有非常紧凑的二进制格式。
+浏览器会更加快速地加载 WebAssembly，因为 WebAssembly 只会传输已经编译好的 wasm 文件。而且 wasm 是底层的类汇编语言，具有非常简洁的二进制格式。
 
 ## 执行速度
 
-如今 Wasm 运行速度只比**原生代码**慢 20%。无论如何，这是一个令人惊喜的结果。它是这样的一种格式，会被编译进沙箱环境中且在大量的约束条件下运行以保证没有任何安全漏洞或者使之强化。和真正的原生代码比较，执行速度的下降微乎其微。另外，未来将会更加快速。
+如今 Wasm 运行速度只比**原生代码**慢 20%。无论如何，这是一个令人惊喜的结果。它是这样的一种格式，会被编译进沙箱环境中且在大量的约束条件下运行以保证没有任何安全漏洞或者使之强化以对抗漏洞。和真正的原生代码比较，执行速度的下降微乎其微。另外，未来将会更加快速。
 
 更让人高兴的是，它具备很好的浏览器兼容特性－所有主流浏览器引擎都支持 WebAssembly 且运行速度相关无几。
 
@@ -36,9 +36,9 @@ WASM 让你在其中使用除 JavaScript 的语言以外的语言（比如 C, C+
 
 <center>V8 技术：懒编译</center>
 
-左边是 JavaScript 源码，包含 JavaScript 函数。首先，源码先把字符串转换为记号以便于解析，之后生成一个[语法抽象树](https://en.wikipedia.org/wiki/Abstract_syntax_tree)。
+左边是 JavaScript 源码，包含 JavaScript 函数。首先，源码先把字符串转换为记号以便于解析，之后生成一个[抽象语法树](https://en.wikipedia.org/wiki/Abstract_syntax_tree)。
 
-语法抽象树是 JavaScript 程序逻辑在内存中的图示。一旦生成图示，V8 直接进入到机器码阶段。你基本上是遍历树，生成机器码然后获得编译后的函数。这里没有任何真正的尝试来加速这一过程。
+抽象语法树是 JavaScript 程序逻辑在内存中的图示。一旦生成图示，V8 直接进入到机器码阶段。你基本上是遍历树，生成机器码然后获得编译后的函数。这里没有做任何真正的尝试来加快速度。
 
 现在，让我们看一下下一阶段 V8 管道的工作内容：
 
@@ -46,7 +46,7 @@ WASM 让你在其中使用除 JavaScript 的语言以外的语言（比如 C, C+
 
 <center>V8 管道设计</center>
 
-现在，我们拥有 [TurboFan](https://github.com/v8/v8/wiki/TurboFan) ，它是 V8 的优化编译程序之一。当 JavaScript 运行的时候，大量的代码是在 V8 内部运行的。TurboFan  监视运行得慢的代码，引起性能瓶颈的地方及热点（内存使用过高的地方）以便优化它们。它把以上监视得到的代码推向后端即优化过的[即时编译器](https://en.wikipedia.org/wiki/Just-in-time_compilation)，该编译器把消耗大量 CPU 资源的函数转换为性能更优的代码。
+现在，我们拥有 [TurboFan](https://github.com/v8/v8/wiki/TurboFan) ，它是 V8 的优化编译程序之一。当 JavaScript 运行的时候，大量的代码是在 V8 内部运行的。TurboFan  监视运行得慢的代码，引起性能瓶颈的地方及热点（内存使用过高的地方）以便优化它们。它把以上监视得到的代码推向后端即优化[即时编译器](https://en.wikipedia.org/wiki/Just-in-time_compilation)，编译器把消耗大量 CPU 资源的函数转换为性能更优的代码。
 
 它解决了性能的问题，但是缺点即是分析代码及辨别哪些代码需要优化的过程也是会消耗 CPU 资源的。这也即意味着更多的耗电量，特别是在手机设备。
 
@@ -66,11 +66,11 @@ wasm 在编译阶段就已经通过了代码优化。总之，解析也不需要
 
 <center>WebAssembly 可信和不可信状态</center>
 
-举个栗子，一个 C++ 的程序的内存被编译为 WebAssembly，它是整段连续的没有空洞的内存块。wasam 中有一个可以用来提升代码安全性的功能即执行堆栈和线性内存隔离的概念。在 C++ 程序中，你有一块动态内存区，你从其底部分配获得内存堆栈，然后从其顶部获得内存来增加内存堆栈的大小。你可以获得一个指针然后在堆栈内存中遍历以操作你不应该接触到的变量。
+举个栗子，一个 C++ 的程序的内存被编译为 WebAssembly，它是整段连续的没有空洞的内存块。wasam 中有一个可以用来提升代码安全性的功能即执行栈和线性内存隔离的概念。在 C++ 程序中，你有堆，从堆底部进行分配，然后从其顶部来增加执行栈的大小。你可以获得一个指针然后在堆栈内存中遍历以操作你不应该接触到的变量。
 
 这是大多数可疑软件可以利用的漏洞。
 
-WebAssembly 采用了完全不同的内存模型。执行堆栈和 WebAssembly 程序本身是隔离开来的，所以你无法从里面进行修改和改变诸如变量值的情形。同样地，函数使用整数偏移而不是指针。函数指向一个间接函数表。之后，这些直接的计算出的数字进入模块中的函数。它就是这样运行的，这样你就可以同时引入多个 wasm 模块，偏移所有索引且每个模块都运行良好。
+WebAssembly 采用了完全不同的内存模型。执行栈和 WebAssembly 程序本身是隔离开来的，所以你无法从里面修改和诸如修改变量。同样地，函数使用整数位移而不是指针。函数指向一个间接函数表。之后，这些直接的计算出的数字进入模块中的函数。它就是这样构建的，这样你就可以同时引入多个 wasm 模块，偏移所有索引且每个模块都运行良好。
 
 更多关于 JavaScript 内存模型和管理的文章详见[这里](https://blog.sessionstack.com/how-javascript-works-memory-management-how-to-handle-4-common-memory-leaks-3f28b94cfbec)。
 
@@ -78,23 +78,23 @@ WebAssembly 采用了完全不同的内存模型。执行堆栈和 WebAssembly �
 
 你已经知晓 JavaScript 的内存管理是由内存垃圾回收器处理的。
 
-WebAssembly 的情况有点不太一样。它支持手动操作内存的语言。你也可以在 wasm 模块中内置内存垃圾回收器，但这是一项复杂的任务。
+WebAssembly 的情况有点不太一样。它支持手动操作内存的语言。你也可以在 wasm 模块中内置自己的内存垃圾回收器，但这是一项复杂的任务。
 
-目前，WebAssembly 是专门围绕 C++ 和 RUST 的使用场景设计的。由于 wasm 是非常底层的语言，这意味着只比汇编语言高一级的编程语言会容易被编译成 WebAssembly。C 语言可以使用 malloc，C++ 可以使用智能指针，Rust 使用完全不同的模式（一个完全不同的话题）。这些语言没有使用内存垃圾回收器，所以他们不需要所有复杂运行时的东西来追踪内存。WebAssembly 自然就很适合于这些语言。
+目前，WebAssembly 是围绕 C++ 和 RUST 的使用案例来设计的。由于 wasm 是非常底层的语言，这意味着只比汇编语言高一级的编程语言会容易被编译成 WebAssembly。C 语言可以使用 malloc，C++ 可以使用智能指针，Rust 使用完全不同的模式（一个完全不同的话题）。这些语言没有使用内存垃圾回收器，所以他们不需要所有复杂运行时的东西来追踪内存。WebAssembly 自然就很适合于这些语言。
 
-另外，这些语言并不能够 100% 地应用于复杂的 JavaScript 使用场景比如监听 DOM 变化 。用 C++ 来写整个的 HTML 程序是毫无意义的因为 C++ 并不是为此而设计的。大多数情况下，工程师用使用 C++ 或 Rust 来编写 WebGL 或者高度优化的库（比如大量的数学运算）。
+另外，这些语言并不能够 100% 地应用于复杂的 JavaScript 使用场景比如更改 DOM 。用 C++ 来写整个的 HTML 程序是毫无意义的因为 C++ 并不是为此而设计的。大多数情况下，工程师用使用 C++ 或 Rust 来编写 WebGL 或者高度优化的库（比如大量的数学运算）。
 
 然而，将来 WebAssembly 将会支持不带内存垃圾回功能的的语言。
 
 ## 平台接口访问
 
-依赖于执行 JavaScript 的运行时环境，可以通过 JavaScript 程序来直接访问这些平台所暴露出的指定接口。比如，当你在浏览器中运行 JavaScript，网络应用可以调用一系列的[网页接口](https://developer.mozilla.org/en-US/docs/Web/API)来控制浏览器／设备的功能且访问 [DOM](https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model)，[CSSOM](https://developer.mozilla.org/en-US/docs/Web/API/CSS_Object_Model)，[WebGL](https://developer.mozilla.org/en-US/docs/Web/API/WebGL_API)，[IndexedDB](https://developer.mozilla.org/en-US/docs/Web/API/IndexedDB_API)，[Web Audio API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API) 等等。
+依赖于执行 JavaScript 的运行时环境，可以通过 JavaScript 程序来直接访问特定平台所暴露出的接口。比如，当你在浏览器中运行 JavaScript，网络应用可以调用一系列的[网页接口](https://developer.mozilla.org/en-US/docs/Web/API)来控制浏览器／设备的功能且访问 [DOM](https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model)，[CSSOM](https://developer.mozilla.org/en-US/docs/Web/API/CSS_Object_Model)，[WebGL](https://developer.mozilla.org/en-US/docs/Web/API/WebGL_API)，[IndexedDB](https://developer.mozilla.org/en-US/docs/Web/API/IndexedDB_API)，[Web Audio API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API) 等等。
 
-然而，WebAssembly 模块不能够访问任何平台的接口。所有的这一切都得由 JavaScript 来进行协调。如果你想在 WebAssembly 模块内访问一些指定平台的接口，你必须得通过 JavaScript 来进行调用。
+然而，WebAssembly 模块不能够访问任何平台的接口。所有的这一切都得由 JavaScript 来进行协调。如果你想在 WebAssembly 模块内访问一些特定平台的接口，你必须得通过 JavaScript 来进行调用。
 
-举个栗子，如果你想要使用 `console.log`，你就得通过JavaScript 而不是 C++ 代码来进行调用。而这些 JavaScript 调用会产生一定的性能损失。
+举个栗子，如果你想要使用 `console.log`，你就得通过 JavaScript 而不是 C++ 代码来进行调用。而这些 JavaScript 调用会产生一定的性能损失。
 
-情况不会一成不变的。规范将会为在未来为 wasm 提供访问指定平台的接口，这样你就可以不用在程序中内置 JavaScript。
+情况不会一成不变的。规范将会为在未来为 wasm 提供访问特定平台的接口，这样你就可以不用在程序中书写 JavaScript。
 
 ## 源码映射
 
@@ -112,9 +112,9 @@ WebAssembly 的情况有点不太一样。它支持手动操作内存的语言�
 
 JavaScript 是单线程的。有很多方法来利用事件循环和使用在之前的[文章](https://github.com/Troland/how-javascript-works/blob/master/event-loop.md)中有提到的异步编程。
 
-JavaScript 也使用 Web Workers 但是只有在极其特殊的情况下－大体上，可以把任何可能阻塞 UI 主线程的密集的 CPU 计算移交给 Web Worker 执行以获得更好的性能。但是，Web Worker 不能够访问 DOM。
+JavaScript 也使用 Web Workers 但是只有在非常特殊的情况下－大体上，可以把任何可能阻塞 UI 主线程的密集的 CPU 计算移交给 Web Worker 执行以获得更好的性能。但是，Web Worker 不能够访问 DOM。
 
-目前 WebAssembly 不支持多线程。但是，这有可能是接下来 WebAssembly 要实现的。Wasm 将会接近实现原生的线程（比如，C++ 风格的线程）。拥有真正的线程将会在浏览器中创造出很多新的机遇。并且当然，会增加滥用的可能性。
+目前 WebAssembly 不支持多线程。但是，这有可能是接下来 WebAssembly 要实现的。Wasm 将会接近实现原生的线程（比如，C++ 风格的线程）。拥有真正的线程将会在浏览器中创造出很多新的机遇。那么当然，会增加滥用的可能性。
 
 ## 可移植性
 
@@ -134,11 +134,11 @@ WebAssembly 的最初版本主要是为了解决大量计算密集型的计算�
 
 另一个合理使用 WebAssembly （高性能）的情况即实现一些处理计算密集型的库。比如，一些图形操作。
 
-正如之前所提到的，wasm 可以有效减少移动设备的电力损耗（依赖于引擎），这是由于大多数的步骤已经在编译阶段提前处理完成。
+正如之前所提到的，wasm 可以有效减少移动设备的电力损耗（依赖于引擎），这是由于大多数的处理步骤已经在编译阶段提前处理完成。
 
-未来，你可以直接使用 WASM 二进制库即使你没有编写编译成它的代码。你可以在 NPM 上面找到一些开始使用这项技术的项目。
+未来，你可以直接使用 WASM 二进制库即使你没有编写可编译成它的代码。你可以在 NPM 上面找到一些开始使用这项技术的项目。
 
-针对操作 DOM 和频繁使用平台接口的情况 ，使用 JavaScript 会更加合理，因为它不会产生额外的性能开销且它原生支持各种接口。
+针对操作 DOM 和频繁使用平台接口的情况 ，使用 JavaScript 会更加合理，因为它不会产生额外的性能开销且拥有原生支持的接口。
 
 在 [SessionStack](https://www.sessionstack.com/?utm_source=medium&utm_medium=blog&utm_content=Post-6-webassembly-outro) 我们一直致力于持续提升 JavaScript 的性能以编写高质量和高效的代码。我们的解决方案必须拥有闪电般的性能因为我们不能够影响用户程序的性能。一旦把 SessionStack 整合进网络应用或网站的生产环境，它会开始记录所有的一切：所有的 DOM 变化，用户交互，JavaScript 异常，堆栈追踪，失败的网络请求和调试数据。所有的这一切都是在生产环境中产生且没有影响到产品的任何交互和性能。我们必须极大地优化我们的代码并且尽可能地让它异步执行。
 
