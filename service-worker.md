@@ -6,11 +6,11 @@
 
 ![](https://user-images.githubusercontent.com/1475173/40543994-3bf0fff8-6059-11e8-8179-9c5ad4ab38c9.jpeg)
 
-或许你已经了解到[渐进式网络应用](https://developers.google.com/web/progressive-web-apps/)将只会越来越流行，因为它旨在创造拥有更加流畅的用户体验的网络应用和创建类 App 的原生应用体验而非浏览器端那样的外观和体验。
+或许你已经了解到[渐进式网络应用](https://developers.google.com/web/progressive-web-apps/)将只会越来越流行，因为它旨在创造拥有更加流畅的用户体验的网络应用和创建类原生 App 的应用体验而非浏览器端那样的外观和体验。
 
 构建渐进式网络应用的主要需求之一即在各种网络和数据加载的条件下仍然可用－它可以在网络不稳定或者没有网络的情况下使用。
 
-本文我们将会深入了解 Service Workers：它们是如何工作的以及你所应该关切的方面。最后，我们将会列出一些Service Workers 可供利用的，独有的优势并且分享我们在 [SessionStack](https://www.sessionstack.com/) 中的团队实践经验。
+本文我们将会深入了解 Service Workers：它们是如何工作的以及应该注意的地方。最后，我们将会列出一些Service Workers 可供利用的，独有的优势并且分享我们在 [SessionStack](https://www.sessionstack.com/) 中的团队实践经验。
 
 ## 概述
 
@@ -19,7 +19,7 @@
 大体上，Service Worker 是一种 Web Worker，更准确地说，它更像是一个 [Shared Worker](https://developer.mozilla.org/en-US/docs/Web/API/SharedWorker)。
 
 * Service Worker 运行在其全局脚本上下文中
-* 不指定和某个网页绑定
+* 不和特定网页相关联
 * 不能够访问 DOM
 
 Service Worker 接口之所以让人感到兴奋的原因之一即它支持网络应用离线运行，这使得开发者能够完全控制网络应用的行为。
@@ -34,7 +34,7 @@ Service Worker 的生命周期和网页完全不相关。它由以下几个步�
 
 ## 下载
 
-这发生于浏览器下载包含 Service Worker 相关代码的 `.js` 文件。
+这发生于浏览器下载包含 Service Worker 代码的 `.js` 文件。
 
 ## 安装
 
@@ -66,19 +66,19 @@ if ('serviceWorker' in navigator) {
 
 这也就回答了为什么要在 load 事件之后注册 Service Worker。这不是必须的，但是强烈推荐这么做。
 
-为什么要这样做呢？假设用户第一次访问网络应用。现在还没有注册 service worker，而且浏览器无法事先知晓是否会最终安装它。如果进行安装，则浏览器将会为增加的线程开辟额外的 CPU 和内存，而这些资源原本是用来渲染网页的。
+为什么要这样做呢？假设用户第一次访问网络应用。现在还没有注册 service worker，而且浏览器无法事先知晓是否会最终安装它。如果进行安装，则浏览器将需要为增加的线程开辟额外的 CPU 和内存，否则浏览器将会渲染网页。
 
 **参考下[这里](https://javascript.info/onload-ondomcontentloaded)，`load ` 事件会加载完所有的资源比如图片，样式之后触发。**
 
 最终的结果即是如果在页面中安装 Service Worker，将有可能导致页面延迟加载和渲染－不能够让用户尽快地访问网页。
 
-需要注意的是这只会发生在第一次访问页面的时候。后续的页面访问不会被 Service Worker 的安装所影响。一旦在首次访问页面的时候激活了 Service Worker ，它就可以处理后续的页面访问所触发的页面加载/缓存事件。这是正确的，Service Worker 需要加载好以处理有限的网络带宽。
+需要注意的是这只会发生在第一次访问页面的时候。后续的页面访问不会被 Service Worker 的安装所影响。一旦在首次访问页面的时候激活了 Service Worker ，它就可以处理后续的页面访问所触发的页面加载/缓存事件。这是正确的，Service Worker 需要准备好以处理有限的网络连接活动。
 
 ## 激活
 
 安装完之后下一步即激活。该步骤是操作之前缓存资源的绝佳时机。
 
-一旦激活，Service Worker 就可以开始控制在其作用域内的所有页面。一个有趣的事实即：注册了 Service Worker 的页面直到再次加载的时候才会被 Service Worker 进行处理。当 Service Worker 开始进行控制，它有以下几种状态：
+一旦激活，Service Worker 就可以开始控制在其作用域内的所有页面。一个有趣的事实即：注册了 Service Worker 的页面直到再次加载的时候才会被 Service Worker 控制。当 Service Worker 开始进行控制，它有以下几种状态：
 
 * 处理来自页面的网络或者消息请求所触发的 fetch 及 message 事件
 * 中止以节约内存
@@ -89,7 +89,7 @@ if ('serviceWorker' in navigator) {
 
 ## 处理 Service Worker 内部的安装过程
 
-在页面运行注册 Service Worker 的过程中，让我们来看看 Service Worker 脚本中发生的事情，它监听 Service Worker  实例的 `install` 事件。
+在页面运行注册 Service Worker 的过程中，让我们来看看 Service Worker 脚本中发生的事情，它通过为 Service Workder 实例添加事件句柄来处理 Service Worker  实例的 `install` 事件。
 
 以下为处理 `install` 事件所需要执行的步骤：
 
@@ -171,7 +171,7 @@ self.addEventListener('fetch', function(event) {
 
 大概的流程如下：
 
-* `event.respondWith()` 会决定如何响应 `fetch` 事件。 `caches.match()` 查询请求然后返回之前创建的缓存中的任意缓存数据并返回 promise。
+* `event.respondWith()` 会决定如何响应 `fetch` 事件。 `caches.match()` 查询请求及查找之前创建的缓存中是否有任意缓存结果并返回 promise。
 * 如果有，则返回该缓存数据。
 * 否则，执行 `fetch` 。
 * 检查返回的状态码是否是 `200`。同时检查响应类型是否为 **basic**，即检查请求是否同域。当前场景不缓存第三方资源的请求。
@@ -187,13 +187,13 @@ self.addEventListener('fetch', function(event) {
 
 创建新的 Service Worker 的过程将会启动，然后触发 `install` 事件。然而，这时候，旧的 Service Worker 仍然控制着网络应用的页面意即新的 Service Worker 将会处于 `waiting` 状态。
 
-一旦关闭网络应用当前打开的页面，旧的 Service Worker 将会被浏览器杀死而新的 Service Worker 就可以上位了。这时候将会触发 `activate` 事件。
+一旦关闭网络应用当前打开的页面，旧的 Service Worker 将会被浏览器杀死而新安装的 Service Worker 就可以上位了。这时候将会触发 `activate` 事件。
 
 为什么所有这一切是必须的呢？这是为了避免在不同选项卡中同时运行不同版本的的网络应用所造成的问题－一些在网页中实际存在的问题且有可能会产生新的 bug（比如当在浏览器中本地存储数据的时候却拥有不同的数据库结构）。
 
 ## 从缓存中删除数据
 
-`activate` 回调中最为常见的步骤即缓存管理。因为若想删除安装步骤中老旧的缓存，而这又会导致 Service Workers 无法获取该缓存中的文件数据，所以，这时候需要进行缓存管理。
+`activate` 回调中最为常见的步骤即缓存管理。因为若想删除安装步骤中老旧的缓存，而这又会导致旧 Service Workers 无法获取该缓存中的文件数据，所以，这时候就需要进行缓存管理。
 
 这里有一个示例演示如何把未在白名单中的缓存删除（该情况下，以 `page-1` 或者 `page-2` 来进行命名）：
 
@@ -225,7 +225,7 @@ self.addEventListener('activate', function(event) {
 
 可以利用 Service Worker劫持网络连接和伪造响应数据。如果不使用 HTTPS，网络应用会容易遭受[中间人](https://en.wikipedia.org/wiki/Man-in-the-middle_attack) 攻击。
 
-为了保证安全，必须通过 HTTPS 在页面上注册 Service Workers，这样就可以保证浏览器接收到的 Service Worker 没有在传输过程中被篡改。
+为了保证安全，必须在支持 HTTPS  的页面上注册 Service Workers，这样就可以保证浏览器接收到的 Service Worker 没有在传输过程中被篡改。
 
 ## 浏览器支持
 
@@ -241,8 +241,8 @@ Service Workers 拥有良好的浏览器兼容性。
 
 Service Worker 独有的功能：
 
-* 推送通知－允许用户选择定时接收网络应用的推送更新
-* 后台同步－允许延迟操作直到网络连接稳定之后。这样就可以保证用户即时发送数据。
+* 推送通知－允许用户选择及时接收网络应用的推送更新
+* 后台同步－允许延迟操作直到网络连接稳定之后。这样就可以保证用户切实发送数据。
 * 定期同步（以后支持）－提供了管理进行定期后台数据同步的功能
 * **Geofencing** （以后支持）－可以自定义参数，也即 **geofences** ，该参数包含着用户所感兴趣的地区。当设备穿过某片地理围栏的时候会收到通知，这就能够让你基于用户的地理位置来提供有用的用户体验。
 
