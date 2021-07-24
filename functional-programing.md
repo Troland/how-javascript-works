@@ -18,7 +18,7 @@
 
 本文将讨论更多有关函数式编程的内容，包括它如何在 JavaScript 中工作以及一些重要概念，以便更好理解 JavaScript 中的函数式编程。
 
-## JavaScript 面向对象概述 
+## JavaScript 面向对象基础概述 
 
 毋庸置疑 JavaScript 是基于原型的语言，而不是基于类，并且 JavaScript 开发者经常会混淆或误解此模型。基于类的语言（例如C＃，Java等）在两个主要概念：类和实例。类定义了该对象在实例化时应该具有的所有属性。
 
@@ -68,9 +68,9 @@ let alex = new Work('Alex', 30, 'SessionStack');
 console.log(alex.getInfo());
 ```
 
-这样我们就创建了一个对象并将其扩展以定义更多属性。在基于类的编程语言中，这种概念称为子类。
+这样我们就创建了一个对象并将其扩展以支持定义更多属性。在基于类的编程语言中，这种概念称为子类。
 
-那么在 JavaScript 旧语法中是应该实现呢？ 记住 `class` 语法在底层仍然只是制作原型。一起来看下面这个例子：
+那么在 JavaScript 旧语法中是应该实现呢？ 记住 `class` 语法在底层仍然只是原型制作。一起来看下面这个例子：
 
 ```js
 let Person = function(name, age) {
@@ -122,11 +122,11 @@ console.log(alex.getInfo());
 
 ## 什么是 JavaScript 函数式编程？
 
-对于大多数开发者来说，在 JavaScript 中使用函数式编程的思想似乎会更轻松。为什么？众所周知，JavaScript 是一门基于原型的语言，而这些 `prototype inheritance`，`this`，`setPropertyOf`和其他确实令人困惑，而且大多都被被误解。
+对于大多数开发者来说，在 JavaScript 中使用函数式编程的思想似乎会更轻松。为什么？众所周知，JavaScript 是一门基于原型的语言，而这些 `prototype inheritance`，`this`，`setPropertyOf` 等确实令人困惑，而且大多都容易被误解。
 
-不过，与在基于原型的编码中使用错误的 `this` 绑定相比，我们有 JavaScript 的函数式方法使工作变得更简单，更少的 bug且易于维护。
+不过，与在基于原型的编码中使用错误的 `this` 绑定相比，我们有 JavaScript 的函数式方法使工作变得更简单，更少的 bug 且易于维护。
 
-使用函数式编程思想的 JavaScript 开发者社区很大，并且大多数库都允许在项目中使用这种范式。这意味着在遇到问题时，StackOverflow 或其他任何地方都将提供足够的帮助。
+使用函数式编程思想的 JavaScript 开发者社区日益壮大，并且大多数库都允许在项目中使用这种范式。这意味着在遇到问题时，StackOverflow 或其他任何地方都将提供足够的帮助。
 
 JavaScript 中的函数式代码如下：
 
@@ -148,7 +148,7 @@ sayHello('Victor');
 
 ### 纯函数
 
-函数编程式的一个主要目标是 -- 避免副作用并使用纯函数。避免副作用意味着函数应仅通过接受参数（输入）并对其进行处理来进行计算。函数应该是纯粹的。让我们看一个具有副作用的非纯函数示例。
+函数编程式的一个主要目标是 - 避免副作用并使用纯函数。避免副作用意味着函数应仅通过接受参数（输入）并对其进行处理来进行计算。函数应该是纯粹的。让我们看一个具有副作用的非纯函数示例。
 
 ```js
 let surname = 'Jonah';
@@ -275,9 +275,9 @@ const employee = {
 Object.freeze(employee);
 
 employee.name = "Max"
-//Outputs: Cannot assign to read-only property 'name'
+// Outputs: Cannot assign to read-only property 'name'
 
-//Checks if our object is immutable or not
+// Checks if our object is immutable or not
 Object.isFrozen(employee); // === true
 ```
 
