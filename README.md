@@ -29,7 +29,7 @@
 - 第二十一章：[5 种跨站脚本攻击及防御措施](xss-attack.md)
 - 第二十二章：[跨站请求伪造攻击及 7 种缓解策略](csrf.md)
 - 第二十三章：[迭代器及生成器高阶控制技巧](iterators.md)
-- 第二十四章：[密码学及中间人攻击处理](cryptography.md)
+- 第二十四章：[密码术及中间人攻击处理](cryptography.md)
 - 第二十五章：[函数式编程及与其他范式对比](functional-programing.md)
 - 第二十六章：[3 种多态](polymorphism.md)
 

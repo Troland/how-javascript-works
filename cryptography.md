@@ -1,4 +1,4 @@
-# 密码学及中间人攻击处理
+# 密码术及中间人攻击处理
 
 > 原文请查阅[这里](https://blog.sessionstack.com/how-javascript-works-cryptography-how-to-deal-with-man-in-the-middle-mitm-attacks-bf8fc6be546c)，本文采用[知识共享署名 4.0 国际许可协议](http://creativecommons.org/licenses/by/4.0/)共享，BY [Troland](https://github.com/Troland)。
 
@@ -10,17 +10,17 @@
 
 那么人们如何才能安全地通过互联网发送信息，`JavaScript` 又将扮演什么角色？这篇文章将带你一同寻答案。
 
-在本章中，您将了解密码学及其是如何在 `JavaScript` 中工作以及处理中间人攻击（MitM）。
+在本章中，您将了解密码术及其是如何在 `JavaScript` 中工作以及处理中间人攻击（MitM）。
 
-## 什么是加密
+## 什么是密码术
 
-密码学主要关注保护信息和通信安全的过程，确保只有发送者和预定的接收方才能访问。密码学构造了各种技术用于正确地保护通信。这些技术包括使用密钥进行加密解密，使用各种算法对通信过程进行哈希处理，或签名生成和验证。
+密码术主要关注保护信息和通信安全的过程，确保只有发送者和预定的接收方才能访问。密码术构造了各种技术用于正确地保护通信。这些技术包括使用密钥进行加密解密，使用各种算法对通信过程进行哈希处理，或签名生成和验证。
 
 由于许多人使用 `JavaScript` 构建的移动应用程序在互联网上进行交流，因此有必要了解加密在 `JavaScript` 中的工作方式。在下一节中，我们将研究 `JavaScript` 的 Web 加密 API 及其如何支持加密。
 
 ## JavaScript Web 加密 API
 
-确保通过互联网进行安全通信非常重要，因此部分浏览器已实现了 [`crypto`](https://developer.mozilla.org/en-US/docs/Web/API/Crypto)接口。但此接口定义不那么明确且听起来和密码学不那么相关。 `JavaScript` 的网络加密API 提供了一个定义明确的接口，称为 [`SubtleCrypto`](https://developer.mozilla.org/en-US/docs/Web/API/SubtleCrypto)。
+确保通过互联网进行安全通信非常重要，因此部分浏览器已实现了 [`crypto`](https://developer.mozilla.org/en-US/docs/Web/API/Crypto)接口。但此接口定义不那么明确且听起来和密码术不那么相关。 `JavaScript` 的网络加密API 提供了一个定义明确的接口，称为 [`SubtleCrypto`](https://developer.mozilla.org/en-US/docs/Web/API/SubtleCrypto)。
 
 加密 API 允许开发人员将基本的加密功能集成到他们的应用中而不需第三方库。您可以进行文档签名，身份验证或对通信进行完整性检查。
 
@@ -40,29 +40,29 @@ console.log(secure);
 
 ![](./assets/0_EoQo41lZY6_RXAii.png)
 
-在上图例中，您可以看到 API​​ 对发送方的数据进行了加密。接收者使用密钥解密数据，服务器和数据库无法解密加密数据。您可以执行基本的加密操作，例如散列，签名生成和验证，加密和解密，这些将在本文中进一步讨论。
+在上图例中，您可以看到 API​​ 对发送方的数据进行了加密。接收者使用密钥解密数据，服务器和数据库无法解密加密数据。您可以执行基本的加密操作，例如散列，签名生成和验证。至于加密和解密，这些将在本文中进一步讨论。
 
-## 基本加密函数
+## 基本密码学函数
 
 开发者可以使用 `JavaScript` 网络加密 API 执行多种加密功能。在本节中，我们将研究基本的加密函数，例如散列，签名生成和验证，加密和解密。
 
 ### 加密
 
-加密是基本的密码学功能之一。在加密中，使用密钥将人类语言（纯文本）的消息转换为计算机语言（密文）。为了使接收者理解发送者的消息，他们必须使用密钥。
+加密是基本的密码学函数之一。在加密中，使用密钥将人类语言（纯文本）的消息转换为计算机语言（密文）。为了使接收者理解发送者的消息，他们必须使用密钥。
 
 ![](./assets/0_g6rpKt5YynDCQ5n3.png)
 
 加密过程使用 `crypto` 方法。语法如下：
 
 ```js
-//Syntax for encrypt function
+// ncrypt 语法
 const result = crypto.subtle.encrypt(algorithm, key, data);
 ```
 
-`crypto` 方法将返回一个包含 `ArrayBuffer`(密文载体) 的 `Promise`。如果在加密过程中发生错误，最好返回一个拒绝的新 `Promise`，以规范化算法。为了更好地理解这一点，我们将使用 `AES-GCM` 密钥和算法对纯文本进行加密。在浏览器中复制以下代码，注意输出的是密文。
+`crypto` 方法将返回一个包含 `ArrayBuffer` (密文载体) 的 `Promise`。如果在加密过程中发生错误，最好返回一个拒绝的新 `Promise`，以规范化算法。为了更好地理解这一点，我们将使用 `AES-GCM` 密钥和算法对纯文本进行加密。在浏览器中复制以下代码，注意输出的是密文。
 
 ```js
-/*The function strToArrayBuffer converts string to fixed-length raw binary data buffer because 
+/* The function strToArrayBuffer converts string to fixed-length raw binary data buffer because 
 encrypt method must return a Promise that fulfills with an ArrayBuffer containing the "ciphertext"*/
 function strToArrayBuffer(str) {
   var buf = new ArrayBuffer(str.length * 2);
@@ -72,33 +72,33 @@ function strToArrayBuffer(str) {
   }
   return buf;
 }
-//The function arrayBufferToString converts fixed-length raw binary data buffer to 16-bit unsigned String as our plaintext
+// The function arrayBufferToString converts fixed-length raw binary data buffer to 16-bit unsigned String as our plaintext
 function arrayBufferToString(buf) {
   return String.fromCharCode.apply(null, new Uint16Array(buf));
 }
-//This object below will generate our algorithm key
+// This object below will generate our algorithm key
 var algoKeyGen = {
   name: "AES-GCM",
   length: 256,
 };
-//This will generate random values of 8-bit unsigned integer
+// This will generate random values of 8-bit unsigned integer
 var iv = window.crypto.getRandomValues(new Uint8Array(12));
-//This object will generate our encryption algorithm
+// This object will generate our encryption algorithm
 var algoEncrypt = {
   name: "AES-GCM",
   iv: iv,
   tagLength: 128,
 };
-//states that key usage is for encryption
+// states that key usage is for encryption
 var keyUsages = ["encrypt"];
 var plainText = "This is a secure message from Mary";
 var secretKey;
-//This generates our secret Key with key generation algorithm
+// This generates our secret Key with key generation algorithm
 window.crypto.subtle
   .generateKey(algoKeyGen, false, keyUsages)
   .then(function (key) {
     secretKey = key;
-  //Encrypt plaintext with key and algorithm converting the plaintext to ArrayBuffer
+  // Encrypt plaintext with key and algorithm converting the plaintext to ArrayBuffer
     return window.crypto.subtle.encrypt(
       algoEncrypt,
       key,
@@ -106,7 +106,7 @@ window.crypto.subtle
     );
   })
   .then(function (cipherText) {
-  //print out Ciphertext in console
+  // print out Ciphertext in console
     console.log("Cipher Text: " + arrayBufferToString(cipherText));
   })
   .catch(function (err) {
@@ -116,7 +116,7 @@ window.crypto.subtle
 
 ![](./assets/0_bIg_WMaJvjHWSc5J.png)
 
-观察一下代码，定义算法时也定义了 key 值。
+观察代码，指定算法时也指明了 key 值。
 
 ```js
 var algoKeyGen = { name: 'AES-GCM', length: 256};
@@ -125,6 +125,7 @@ var algoKeyGen = { name: 'AES-GCM', length: 256};
 ```js
 var algoEncrypt = { name: 'AES-GCM', iv: iv, tagLength: 128};
 ```
+
 `strToArrayBuffer` 函数将纯文本转换为密文，因为要实现的 `Promise` 必须是带有密文的 [`ArrayBuffer`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ArrayBuffer)。
 
 ### 解密
@@ -134,30 +135,30 @@ var algoEncrypt = { name: 'AES-GCM', iv: iv, tagLength: 128};
 `JavaScript` 的网络加密API中的解密过程使用 `decrypt` 方法。以下是解密语法。
 
 ```js
-//syntax for decrypting ciphertext
+// ciphertext 语法
 const result = crypto.subtle.decrypt(algorithm, key, data);
 ```
 解密上述密文例子的代码如下：
 
 ```js
-//This states that the keyusage for decrypting
+// This states that the keyusage for decrypting
 var keyUsages = ["decrypt"];
-//This object below is for algorithm key generation
+// This object below is for algorithm key generation
 var algoKeyGen = {
   name: "AES-GCM",
   length: 256,
 };
 var plainText = "This is a secure message from Mary";
 var secretKey;
-//This will generate secrete key with algorithm key and keyusage
+// This will generate secrete key with algorithm key and keyusage
 window.crypto.subtle
   .generateKey(algoKeyGen, false, keyUsages)
   .then(function (key) {
     secretKey = key;
-    //This will decrypt Cipheretext to plaintext
+    // This will decrypt Cipheretext to plaintext
     return window.crypto.subtle.decrypt(algoEncrypt, secretKey, cipherText);
   })
-  //  Print plaintext in console.
+  // Print plaintext in console.
   .then(function (plainText) {
     console.log("Plain Text: " + arrayBufferToString(plainText));
   })
@@ -171,7 +172,7 @@ window.crypto.subtle
 ```js
 // This code below will encrypt and decrypt plaintext
 
-/*The function strToArrayBuffer converts string to fixed-length raw binary data buffer because 
+/* The function strToArrayBuffer converts string to fixed-length raw binary data buffer because 
 encrypt method must return a Promise that fulfills with an ArrayBuffer containing the "ciphertext"*/
 function strToArrayBuffer(str) {
   var buf = new ArrayBuffer(str.length * 2);
@@ -181,7 +182,7 @@ function strToArrayBuffer(str) {
   }
   return buf;
 }
-//The function arrayBufferToString converts fixed-length raw binary data buffer to 16-bit unsigned String as our plaintext
+// The function arrayBufferToString converts fixed-length raw binary data buffer to 16-bit unsigned String as our plaintext
 function arrayBufferToString(buf) {
   return String.fromCharCode.apply(null, new Uint16Array(buf));
 }
@@ -190,24 +191,24 @@ var algoKeyGen = {
   name: "AES-GCM",
   length: 256,
 };
-//This will generate random values of 8-bit unsigned integer
+// This will generate random values of 8-bit unsigned integer
 var iv = window.crypto.getRandomValues(new Uint8Array(12));
-//This object will generate our encryption algorithm
+// This object will generate our encryption algorithm
 var algoEncrypt = {
   name: "AES-GCM",
   iv: iv,
   tagLength: 128,
 };
-//states that key usage is for encrypting and decrypting
+// states that key usage is for encrypting and decrypting
 var keyUsages = ["encrypt", "decrypt"];
 var plainText = "This is a secure message from Mary";
 var secretKey;
-//This generates our secret Key with key generation algorithm
+// This generates our secret Key with key generation algorithm
 window.crypto.subtle
   .generateKey(algoKeyGen, false, keyUsages)
   .then(function (key) {
     secretKey = key;
-  //Encrypt plaintext with key and algorithm converting the plaintext to ArrayBuffer
+  // Encrypt plaintext with key and algorithm converting the plaintext to ArrayBuffer
     return window.crypto.subtle.encrypt(
       algoEncrypt,
       key,
@@ -215,12 +216,12 @@ window.crypto.subtle
     );
   })
   .then(function (cipherText) {
-  //This prints out the ciphertext, converting it from ArrayBuffer to 16-bit unsigned String
+  // This prints out the ciphertext, converting it from ArrayBuffer to 16-bit unsigned String
     console.log("Cipher Text: " + arrayBufferToString(cipherText));
-  //This will decrypt ciphertext with secret key and algorithm
+  // This will decrypt ciphertext with secret key and algorithm
     return window.crypto.subtle.decrypt(algoEncrypt, secretKey, cipherText);
   })
-  //This prints out the plaintext, converting it from ArrayBuffer to 16-bit unsigned String
+  // This prints out the plaintext, converting it from ArrayBuffer to 16-bit unsigned String
   .then(function (plainText) {
     console.log("Plain Text: " + arrayBufferToString(plainText));
   })
@@ -247,7 +248,7 @@ window.crypto.subtle.generateKey(algoKeyGen, false, keyUsages)
 
 ### 散列
 
-散列是一种加密方法，它允许您将任意大小的数据映射到固定大小的数组。加密哈希函数将数据从纯文本转换为唯一的数字字母字符串。散列与加密不同，它是一种单向功能。这意味着很难且几乎不可能从散列值中获取原始文本。
+散列是一种加密方法，它允许您将任意大小的数据映射到固定大小的数组。加密哈希函数将数据从纯文本转换为唯一的数字字母字符串。散列与加密不同，它是单向的。这意味着很难且几乎不可能从散列值中获取原始文本。
 
 散列利用数学算法将纯文本转换为散列值。不像加密一样有能解密散列值的密钥。加密哈希函数主要用于身份验证。例如，在注册/登录中。用户注册时，密码会先进行哈希处理，然后再存储在数据库中。每当用户尝试登录时，都会对他们的密码进行哈希处理并将其与数据库中的哈希值进行比较确保密码匹配。使用这种方法，如果攻击者劫持了软件公司的数据库，则用户的登录信息对他们来说是无用的，因为他们无法解码或理解密码。
 
@@ -256,7 +257,7 @@ window.crypto.subtle.generateKey(algoKeyGen, false, keyUsages)
 加密 API 提供了 `crypto.subtle.digest` 函数用于哈希加密。可以使用以下语法使用 `SHA-1` ，`SHA-384` 或 `SHA-512` 算法对纯文本进行哈希处理。
 
 ```js
-// Syntax for hashing plaintext
+// hashing 语法
 const digest = crypto.subtle.digest(algorithm, data);
 ```
 
@@ -283,16 +284,16 @@ console.log(digestHex);
 
 ## 签名生成及认证
 
-这是 `JavaScript` 的 Web 加密 API 的另一种加密方法。使用 `sign` 和 `verify` 方法，开发者可以使用密钥对文档进行签名。接收者可以使用他们的密钥来验证消息。
+这是 `JavaScript` 的 Web 加密 API 的另一种加密函数。使用 `sign` 和 `verify` 方法，开发者可以使用密钥对文档进行签名。接收者可以使用他们的密钥来验证消息。
 
 假设一个这样的场景，你想发送文档给朋友。为了确保文件的真实性，你需要对其进行签名。收到邮件的朋友会在看到签名就知道是你发的。
 
 使用 `sign` 和 `verify` 方法来对文件进行签名及验证的语法如下：
 
 ```js
-//syntax to sign document
+// syntax to sign document
 const signature = crypto.subtle.sign(algorithm, key, data);
-//syntax to generate document
+// syntax to generate document
 const result = crypto.subtle.verify(algorithm, key, signature, data);
 ```
 
@@ -314,7 +315,7 @@ ECDH 允许开发者执行以下操作：
 
 ### SHA (Secure Hash Algorithm)
 
-安全散列算法。该算法主要用于执行哈希函数。它将可变数据压缩为固定大小的位字符串输出。Web　加密　API　允许开发者使用`SHA-1`和 `SHA-2` 执行哈希函数，并支持 `SHA-256`，`SHA-384`，`SHA-512` 。开发者必须使用`crypto.subtle.digest` 函数才能使用此算法。
+安全散列算法。该算法主要用于执行哈希函数。它将可变数据压缩为固定大小的位字符串输出。Web　加密　API　允许开发者使用`SHA-1`和 `SHA-2` 执行哈希函数，并支持 `SHA-256`，`SHA-384`，`SHA-512` 。开发者必须使用 `crypto.subtle.digest` 函数才能使用此算法。
 
 ### HMAC (Hash-based Message Authentication Code)
 
