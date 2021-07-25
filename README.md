@@ -32,6 +32,7 @@
 - 第二十四章：[密码术及中间人攻击处理](cryptography.md)
 - 第二十五章：[函数式编程及与其他范式对比](functional-programing.md)
 - 第二十六章：[3 种多态](polymorphism.md)
+- 第二十七章：[正则表达式](regexp.md)
 
 ## 版权说明
 
