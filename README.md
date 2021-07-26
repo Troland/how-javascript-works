@@ -33,6 +33,7 @@
 - 第二十五章：[函数式编程及与其他范式对比](functional-programing.md)
 - 第二十六章：[3 种多态](polymorphism.md)
 - 第二十七章：[正则表达式](regexp.md)
+- 第二十八章：[Deno 简介](deno.md)
 
 ## 版权说明
 
