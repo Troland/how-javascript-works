@@ -12,14 +12,14 @@
 
 ## 概述
 
-[MutationObserver ](https://developer.mozilla.org/en-US/docs/Web/API/MutationObserver) 是现代浏览器提供的用来检测 DOM 变化的网页接口。你可以使用这个接口来监听新增或者删除节点，属性更改，或者文本节点的内容更改。
+[MutationObserver ](https://developer.mozilla.org/en-US/docs/Web/API/MutationObserver) 是现代浏览器提供的用来检测 DOM 变化的网页接口。你可以使用这个接口来监听新增或者删除的节点，属性更改，或者文本节点的内容更改。
 
 可以干点啥好呢？
 
 你可以在以下几种情况信手拈来 MutationObserver 接口。比如：
 
 * 通知用户当前所在的页面所发生的一些变化。
-* 通过使用一些很棒的 JavaScript 框架来根据 DOM 的变化来动态加载 JavaScript 模块。
+* 通过使用一些新的很棒的 JavaScript 框架来根据 DOM 的变化来动态加载 JavaScript 模块。
 * 可能当你在开发一个所见即所得编辑器的时候，使用 MutationObserver 接口来收集任意时间点上的更改，从而轻松地实现撤消/重做功能。
 
 ![](https://user-images.githubusercontent.com/1475173/41054347-b4ad6ecc-69f0-11e8-9ecb-dfe18497b393.png)
@@ -28,7 +28,7 @@
 
 ## 如何使用 MutationObserver
 
-在应用中集成 MutationObserver 是相当简单的。通过往构造函数 `MutationObserver` 中传入一个函数作为参数来初始化一个 MutationObserver 实例，该函数会在每次发生 DOM 发生变化的时候调用。`MutationObserver` 的函数的第一个参数即为单个批处理中的 DOM 变化集。每个变化包含了变化的类型和所发生的更改。
+在应用中集成 MutationObserver 是相当简单的。通过往构造函数 `MutationObserver` 中传入一个函数作为参数来初始化一个 MutationObserver 实例，该函数会在每次发生 DOM 发生变化的时候调用。`MutationObserver` 的函数的第一个参数即为单个批处理中的 所有的 DOM 变化集合。每个变化包含了变化的类型和所发生的更改。
 
 ```
 var mutationObserver = new MutationObserver(function(mutations) {
@@ -40,9 +40,9 @@ var mutationObserver = new MutationObserver(function(mutations) {
 
 创建的实例对象拥有三个方法：
 
-* `observe`－开始进行监听。接收两个参数－要观察的 DOM 节点以及一个配置对象。
+* `observe`－开始进行监听 DOM 更改。接收两个参数－要观察的 DOM 节点以及一个配置对象。
 * `disconnect`－停止监听变化。
-* `takeRecords`－触发回调前返回最新的批量 DOM 变化。
+* `takeRecords`－触发回调前返回最新的批量 DOM 更改。
 
 以下为开始监听的代码片段：
 
@@ -76,7 +76,7 @@ $("#sample-div").removeAttr("class");
 
 ![](https://user-images.githubusercontent.com/1475173/41054356-b715da3c-69f0-11e8-9248-cf5171efa6f0.png)
 
-这一变化是由移除 `class` 属性所引起的。
+这一更改是由移除 `class` 属性所引起的。
 
 最后，如果想停止监听 DOM 变化可以使用如下方法：
 
@@ -101,13 +101,13 @@ mutationObserver.disconnect();
 
 ## 轮询
 
-最简单且粗糙的方法即使用轮询。使用浏览器内置的 setInterval 网页接口你可以创建一个定时任务来定时检查 DOM 的变化。当然了，这个方法会显著地减弱网络应用/网站的性能。
+最简单且粗糙的方法即使用轮询。使用浏览器内置的 setInterval 网页接口你可以创建一个定时任务来定时检查是否 DOM 发生变化。当然了，这个方法会显著地减弱网络应用/网站的性能。
 
 其实，这是可以理解为脏检查，如果有使用过 AngularJS 应该会有看过其脏检查所导致的性能问题。在我的另一个系列里面有稍微介绍了下，具体可以查看[这里](https://github.com/Troland/writing-a-javascript-framework/wiki/4.%E6%95%B0%E6%8D%AE%E7%BB%91%E5%AE%9A%E7%AE%80%E4%BB%8B)。
 
 ## MutationEvents
 
-早在 2000 年，就推出了 [MutationEvents API](https://developer.mozilla.org/en-US/docs/Web/Guide/Events/Mutation_events) 。虽然挺管用的，但是每个单一的 DOM 变化都会触发 mutation 事件，结果又会造成性能问题。现在，`MutationEvents` 接口已经被废弃，不久的将来，现代浏览器全都将停止支持该接口。
+早在 2000 年，就推出了 [MutationEvents API](https://developer.mozilla.org/en-US/docs/Web/Guide/Events/Mutation_events) 。虽然挺管用的，但是每个单一的 DOM 变化都会触发 mutation 事件，结果又会造成性能问题。现在，`MutationEvents` 接口已经被废弃，不久的将来，现代浏览器将全都停止支持该接口。
 
 以下是 `MutationEvents` 的浏览器兼容情况：
 
@@ -115,7 +115,7 @@ mutationObserver.disconnect();
 
 ## CSS 动画
 
-依靠 [CSS 动画](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Animations/Using_CSS_animations) 是一个有点令人感到新奇的替代方案。这听起来会让人有些困惑。大体上，实现思路是这样的，创建一个动画，一旦在 DOM 中添加一个元素就会触发该动画。开始执行 CSS 动画的时候就会触发 `animationstart` 事件：假设为该事件添加事件监听器，就可以准确知晓 DOM 中添加元素的时机。动画的运行时间周期必须非常的短以便让用户感知不到，即体验更佳。
+依靠 [CSS 动画](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Animations/Using_CSS_animations) 是一个有点令人感到新奇的替代方案。这听起来会让人有些困惑。大体上，实现思路是这样的，创建一个动画，一旦在 DOM 中添加一个元素就会触发该动画。开始执行 CSS 动画的时候就会触发 `animationstart` 事件：假设为该事件添加事件监听器，就可以准确知晓 DOM 中添加元素的时机。动画的运行时间周期必须非常的短几乎让用户感知不到，即体验更佳。
 
 首先，需要一个父级元素，在里面监听节点添加事件：
 
@@ -168,4 +168,5 @@ CSS 动画浏览器支持情况：
 
 ![](https://user-images.githubusercontent.com/1475173/41054354-b6bbc696-69f0-11e8-8782-051c474bcf54.png)
 
-相比以上几种替代方案 `MutationObserver` 有几点优势。本质上，它会监听 DOM 可能发生的每个变化并且性能更优，因其会批量 DOM 变化之后才触发回调事件。总之，`MutationObserver` 的兼容性很好，并且还有一些垫片，这些垫片底层是基于 `MutationEvents` 的。
+相比以上几种替代方案 `MutationObserver` 有几点优势。本质上，它会监听 DOM 可能发生的每个变化并且性能更优，因其会在批量 DOM 变化之后才触发回调事件。总之，`MutationObserver` 的兼容性很好，并且还有一些垫片，这些垫片底层使用 `MutationEvents` 。
+
