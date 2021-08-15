@@ -34,6 +34,7 @@
 - 第二十六章：[3 种多态](polymorphism.md)
 - 第二十七章：[正则表达式](regexp.md)
 - 第二十八章：[Deno 简介](deno.md)
+- 第二十八章：[创建型/结构型/行为型设计模式及 4 种最佳实践](design-patterns.md)
 
 ## 版权说明
 
