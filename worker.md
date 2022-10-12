@@ -327,7 +327,7 @@ self.addEventListener('message', function(e) {
 
 * 预取数据：为了优化网站或者网络应用及提升数据加载时间，你可以使用 Workers 来提前加载部分数据以备不时之需。不像其它技术，Web Workers 在这种情况下是最棒哒，因为它不会影响程序的使用体验。
 
-* 渐进式网络应用：即使在网络不稳定的情况下，它们必须快速加载。这意味着数据必须本地存储于浏览器中。这时候 [IndexDB](https://developer.mozilla.org/en-US/docs/Web/API/IndexedDB_API) 及其它类似的 API 就派上用场了。大体上说，一个客户端存储是必须的。为了不阻塞 UI 线程的渲染，这项工作必须由 Web Workers 来执行。呃，当使用 IndexDB的时候，可以不使用 workers 而使用其异步接口，但是之前它也含有同步接口（可能会再次引入 ），这时候就必须在 workers 中使用。
+* 渐进式网络应用：即使在网络不稳定的情况下，它们必须快速加载。这意味着数据必须本地存储于浏览器中。这时候 [IndexDB](https://developer.mozilla.org/en-US/docs/Web/API/IndexedDB_API) 及其它类似的 [API](https://www.interviewbit.com/blog/api-testing-tools/) 就派上用场了。大体上说，一个客户端存储是必须的。为了不阻塞 UI 线程的渲染，这项工作必须由 Web Workers 来执行。呃，当使用 IndexDB的时候，可以不使用 workers 而使用其异步接口，但是之前它也含有同步接口（可能会再次引入 ），这时候就必须在 workers 中使用。
 
   **这里需要注意的是在现代浏览器已经不支持同步接口了，具体可查看[这里](https://developer.mozilla.org/zh-CN/docs/Web/API/IndexedDB_API)。**
 
