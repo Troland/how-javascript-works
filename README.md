@@ -1,6 +1,6 @@
 # how-javascript-works
 
-> Contributors: [@Troland](https://github.com/Troland/) [@三月](https://github.com/heaven2049)。
+> Contributors: [@Troland](https://github.com/Troland/) [@三月](https://github.com/heaven2049) [@chkaos](https://github.com/chkaos)。
 >
 > 本文是翻译介绍 JavaScript 的工作原理的，该系列原文还在更新中，原文见[这里](https://blog.sessionstack.com/tagged/tutorial)。
 
@@ -9,8 +9,8 @@
 - 第一章：[语言引擎，运行时和调用栈概述](overview.md)
 - 第二章：[如何在 V8 引擎中书写最优代码的 5 条小技巧](v8.md)
 - 第三章：[内存管理及如何处理 4 类常见的内存泄漏](memory-management.md)
-- 第四章：[事件循环及异步编程的出现和 5 种更好的 async/await 编程方式](event-loop.md) 
-- 第五章：[深入理解 WebSockets 和带有 SSE 机制的HTTP/2 以及正确的使用姿势](http.md) 
+- 第四章：[事件循环及异步编程的出现和 5 种更好的 async/await 编程方式](event-loop.md)
+- 第五章：[深入理解 WebSockets 和带有 SSE 机制的 HTTP/2 以及正确的使用姿势](http.md)
 - 第六章：[WebAssembly 对比 JavaScript 及其使用场景](webassembly.md)
 - 第七章：[Web Workers 分类及 5 个使用场景](worker.md)
 - 第八章：[Service Workers，生命周期及其使用场景](service-worker.md)
@@ -25,6 +25,16 @@
 - 第十七章：[Shadow DOM 内部构造及如何构建独立组件](shadow-dom.md)
 - 第十八章：[WebRTC 及点对点网络通信机制](webrtc.md)
 - 第十九章：[自定义元素探秘及构建可复用组件最佳实践](custom-element.md)
+- 第二十章：[异常及同步/异步代码异常处理最佳实践](exceptions.md)
+- 第二十一章：[5 种跨站脚本攻击及防御措施](xss-attack.md)
+- 第二十二章：[跨站请求伪造攻击及 7 种缓解策略](csrf.md)
+- 第二十三章：[迭代器及生成器高阶控制技巧](iterators.md)
+- 第二十四章：[密码术及中间人攻击处理](cryptography.md)
+- 第二十五章：[函数式编程及与其他范式对比](functional-programing.md)
+- 第二十六章：[3 种多态](polymorphism.md)
+- 第二十七章：[正则表达式](regexp.md)
+- 第二十八章：[Deno 简介](deno.md)
+- 第二十八章：[创建型/结构型/行为型设计模式及 4 种最佳实践](design-patterns.md)
 
 ## 版权说明
 

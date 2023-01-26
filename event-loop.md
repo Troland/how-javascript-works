@@ -2,7 +2,7 @@
 
 > 原文请查阅[这里](https://blog.sessionstack.com/how-javascript-works-event-loop-and-the-rise-of-async-programming-5-ways-to-better-coding-with-2f077c4438b5)，本文采用[知识共享署名 4.0 国际许可协议](http://creativecommons.org/licenses/by/4.0/)共享，BY [Troland](https://github.com/Troland)。
 
-**这是  JavaScript 工作原理的第四章。**
+**这是 JavaScript 工作原理的第四章。**
 
 现在，我们将会通过回顾单线程环境下编程的弊端及如何克服这些困难以创建令人惊叹的 JavaScript 交互界面来展开第一篇文章。老规矩，我们将会在本章末尾分享 5 条利用 async/await 编写更简洁代码的小技巧。
 
@@ -491,7 +491,7 @@ Promise 的一个重要细节即确定某些值是否是真正的 Promise。换�
 
 ## 异常捕获
 
-如果在创建 Promise 或者是在观察解析 Promise 返回结果的任意时刻，遇到了诸如 `TypeError` 或者 `ReferenceError` 的  JavaScript 错误异常，这个异常会被捕获进而强制进行中的 Promise 为失败状态。
+如果在创建 Promise 或者是在观察解析 Promise 返回结果的任意时刻，遇到了诸如 `TypeError` 或者 `ReferenceError` 的 JavaScript 错误异常，这个异常会被捕获进而强制进行中的 Promise 为失败状态。
 
 比如：
 
@@ -784,7 +784,7 @@ loadData()
 
 不仅是程序本身还有库，书写异步 JavaScript 代码都是相当重要的。
 
-参考资源：
+## 参考资源
 
 * <https://github.com/getify/You-Dont-Know-JS/blob/master/async%20%26%20performance/ch2.md>
 * <https://github.com/getify/You-Dont-Know-JS/blob/master/async%20%26%20performance/ch3.md>

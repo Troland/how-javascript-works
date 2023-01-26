@@ -4,7 +4,7 @@
 >
 > 原文请查阅[这里](https://blog.sessionstack.com/how-javascript-works-memory-management-how-to-handle-4-common-memory-leaks-3f28b94cfbec)，本文采用[知识共享署名 4.0 国际许可协议](http://creativecommons.org/licenses/by/4.0/)共享，BY [Troland](https://github.com/Troland)。
 
-**这是  JavaScript 工作原理的第三章。**
+**这是 JavaScript 工作原理的第三章。**
 
 我们将会讨论日常使用中另一个被开发者越来越忽略的重要话题，这都是日益成熟和复杂的编程语言的锅，即内存管理问题。我们将会提供在创建 [SessionStack](https://www.sessionstack.com/?utm_source=medium&utm_medium=blog&utm_content=Post-3-v8-intro) 的时候所遵循的处理 JavaScript 内存泄漏的几条小技巧，因为我们需要保证 SessionStack 不会引起内存泄漏或者不会增加我们所集成的 web 应用程序的内存消耗。
 
