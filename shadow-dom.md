@@ -31,10 +31,10 @@ Shadow DOM 是一个被设计用来构建基于组件(积木式)的网页程序�
 
 与一般的 DOM 元素相比，Shadow DOM 有两处不同的地方：
 
-* 与一般创建和使用 DOM 的方式相比，开发者如何创建及使用 Shadow DOM 及其与页面上的其它元素的关系
+* 与一般创建和使用 DOM 的方式相比，开发者如何创建及使用 Shadow DOM 并与页面上的其它元素相关联
 * 其展现形式与页面上的其它元素的关系
 
-一般情况下，开发者创建 DOM 节点，然后将其作为子元素挂载到其它元素下。对于 shadow DOM，开发者创建一个独立 DOM 树挂载到目标元素下而该树和其实际子元素是分离的。该独立子树称为 **shadow 树**。shadow 树的挂载元素称为 **shadow 宿主**。包括 `<style>` 在内的所有在 shadow 树下创建的任何标签都只作用于宿主元素内部。此即 shadow DOM 如何实现 CSS 局部样式化的原理。
+一般情况下，开发者创建 DOM 节点，然后将其作为子元素挂载到其它元素下。对于 shadow DOM，开发者创建一个独立 DOM 树挂载到目标元素下，元素与其实际后代元素是分离的。该独立子树称为 **shadow 树**。shadow 树的挂载元素称为 **shadow 宿主**。包括 `<style>` 在内的所有在 shadow 树下创建的任何标签都只作用于宿主元素内部。此即 shadow DOM 如何实现 CSS 局部样式化的原理。
 
 ## 创建 Shadow DOM
 
@@ -57,7 +57,7 @@ shadowRoot.appendChild(paragraphElement);
 
 当书写 HTML 的时候，组合元素构建网页程序。开发者组合及嵌套诸如 `<div>`，`<header>`，`<form>` 及其它不同的构建模块来构建网页程序所需的界面。其中某些标签甚至可以互相兼容。
 
-元素组合定义了诸如为何 `<select>`，`<form>`，`<video>` 及其它元素是可扩展的且接受特定的 HTML 元素作为子元素以便用来对这些元素进行特殊处理。
+元素组合定义了诸如为何 `<select>`，`<form>`，`<video>` 及其它元素是灵活的且接受特定的 HTML 元素作为子元素以便用来对这些元素进行特殊处理。
 
 比如，`<select>` 元素知道如何把 `<option>` 元素渲染成为带有预定义选项的下拉框组件。
 
@@ -77,11 +77,11 @@ Shadow DOM 引入如下功能，可以用来组合元素。
 
 「扩展 button」即开发者自定义组件，而其中的 HTML 即为 Light DOM 且是使用组件的用户所添加的。
 
-这里的 Shadow DOM 即开发者创建的组件(「扩展 button」)。Shadow DOM 仅存在于组件内部且在其中定义其内部结构，局部样式及封装了组件实现详情。
+这里的 Shadow DOM 即开发者创建的组件(「扩展 button」)。Shadow DOM 仅存在于组件内部且在其中定义其内部结构，局部样式及封装了组件实现细节。
 
 ## 扁平 DOM 树
 
-浏览器分发 light DOM 的结果即，由用户在 Shadow DOM 内部创建的 HTML 内容，这些 HTML 内容构成了自定义组件的结构，渲染出最后的产品界面。扁平树即开发者在开发者工具中看到的内容和页面的渲染结果。
+浏览器分发 light DOM 的结果即，由用户在 Shadow DOM 内部创建的 HTML 内容，这些 HTML 内容构成了自定义组件的结构，渲染出最后的产品界面。扁平树即开发者在开发者工具中最终看到的内容和页面的最终渲染结果。
 
 ```
 <extended-button>
@@ -168,7 +168,7 @@ customElements.define('my-paragraph',
 
 这时候 `<slot>` 就派上用场了。
 
-可以把插槽看成是允许开发者在模板中放置自定义 HTML 的占位符的功能。这样开发者就可以创建能用的 HTML 模板并且通过引入插槽来自定义渲染内容。
+可以把插槽看成是允许开发者在模板中放置自定义 HTML 的占位符的功能。这样开发者就可以创建泛型 HTML 模板并且通过引入插槽来自定义渲染内容。
 
 让我们看一下以上模板添加一个插槽的代码如下：
 
@@ -313,7 +313,7 @@ my-paragraph {
 
 ## 使用 :host-context(<selector>) 伪类来定制化元素样式
 
-`:host-context(<selector>)` 伪类找出宿主元素或者宿主元素任意的祖先元素匹配 `<selector>`。
+`:host-context(<selector>)` 伪类找出宿主元素若宿主元素或者宿主元素任意的祖先元素匹配 `<selector>`。
 
 常用于定制化。例如，开发者通过为 `<html>` 或者 `<body>` 添加类来进行定制化：
 
@@ -344,7 +344,7 @@ my-paragraph {
 }
 ```
 
-可以使用 `:host-context()` 来进行定制化主题样式，但是更好的方法即通过 CSS 自定义属性来创建样式钩子。
+可以使用 `:host-context()` 来进行定制化主题样式，但是更好的方法即通过使用 CSS 自定义属性来创建样式钩子。
 
 ## 从外部样式化组件宿主元素
 
@@ -412,7 +412,7 @@ Shadow DOM 内部：
 
 ## 插槽 JavaScript 接口
 
-Shadow DOM API 可能用来操作插槽。
+Shadow DOM API 提供可用来操作插槽的程序。
 
 ## slotchange 事件
 
@@ -429,7 +429,7 @@ slot.addEventListener('slotchange', function(e) {
 
 ## assignedNodes() 方法
 
-了解哪些元素是和插槽有关是很有用处的。调用 `slot.assignedNodes()` 可以找出哪些元素是由插槽渲染的。`flatten: true}` 选项会返回插槽的默认内容(若没有分发任何节点)。
+了解哪些元素是和插槽相关联是很有用处的。调用 `slot.assignedNodes()` 可以找出哪些元素是由插槽渲染的。`{flatten: true}` 选项会返回插槽的默认内容(若没有分发任何节点)。
 
 看一下如下示例：
 
@@ -463,7 +463,7 @@ slot.addEventListener('slotchange', function(e) {
 
 Shadow DOM 中的事件冒泡的经过是值得注意的。
 
-事件目标被调整为维护 Shadow DOM 的封闭性。当事件被重新定位，看起来是由组件自身产生而不是组件的 Shadow DOM 内部元素。
+事件目标被调整为维护 Shadow DOM 的封闭性。当事件被重新定位，看起来是由组件自身产生而不是作为组件一部分的 Shadow DOM 内部元素。
 
 这里有传播出 Shadow DOM 的事件列表(还有一些只能在 Shadow DOM 内传播)：
 
